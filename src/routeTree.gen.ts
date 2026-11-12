@@ -10,33 +10,154 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PlanosRouteImport } from './routes/planos'
+import { Route as Planosv2RouteImport } from './routes/planosv2'
+import { Route as SistemaParaBotecoRouteImport } from './routes/sistema-para-boteco'
+import { Route as SistemaParaCafeteriaRouteImport } from './routes/sistema-para-cafeteria'
+import { Route as SistemaParaChoperiaRouteImport } from './routes/sistema-para-choperia'
+import { Route as SistemaParaPadariaRouteImport } from './routes/sistema-para-padaria'
+import { Route as SistemaParaRestauranteRouteImport } from './routes/sistema-para-restaurante'
+import { Route as BlogIndexRouteImport } from './routes/blog/index'
+import { Route as BlogSlugRouteImport } from './routes/blog/$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PlanosRoute = PlanosRouteImport.update({
+  id: '/planos',
+  path: '/planos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Planosv2Route = Planosv2RouteImport.update({
+  id: '/planosv2',
+  path: '/planosv2',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SistemaParaBotecoRoute = SistemaParaBotecoRouteImport.update({
+  id: '/sistema-para-boteco',
+  path: '/sistema-para-boteco',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SistemaParaCafeteriaRoute = SistemaParaCafeteriaRouteImport.update({
+  id: '/sistema-para-cafeteria',
+  path: '/sistema-para-cafeteria',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SistemaParaChoperiaRoute = SistemaParaChoperiaRouteImport.update({
+  id: '/sistema-para-choperia',
+  path: '/sistema-para-choperia',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SistemaParaPadariaRoute = SistemaParaPadariaRouteImport.update({
+  id: '/sistema-para-padaria',
+  path: '/sistema-para-padaria',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SistemaParaRestauranteRoute = SistemaParaRestauranteRouteImport.update({
+  id: '/sistema-para-restaurante',
+  path: '/sistema-para-restaurante',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogIndexRoute = BlogIndexRouteImport.update({
+  id: '/blog/',
+  path: '/blog/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/blog/$slug',
+  path: '/blog/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/planos': typeof PlanosRoute
+  '/planosv2': typeof Planosv2Route
+  '/sistema-para-boteco': typeof SistemaParaBotecoRoute
+  '/sistema-para-cafeteria': typeof SistemaParaCafeteriaRoute
+  '/sistema-para-choperia': typeof SistemaParaChoperiaRoute
+  '/sistema-para-padaria': typeof SistemaParaPadariaRoute
+  '/sistema-para-restaurante': typeof SistemaParaRestauranteRoute
+  '/blog/$slug': typeof BlogSlugRoute
+  '/blog/': typeof BlogIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/planos': typeof PlanosRoute
+  '/planosv2': typeof Planosv2Route
+  '/sistema-para-boteco': typeof SistemaParaBotecoRoute
+  '/sistema-para-cafeteria': typeof SistemaParaCafeteriaRoute
+  '/sistema-para-choperia': typeof SistemaParaChoperiaRoute
+  '/sistema-para-padaria': typeof SistemaParaPadariaRoute
+  '/sistema-para-restaurante': typeof SistemaParaRestauranteRoute
+  '/blog/$slug': typeof BlogSlugRoute
+  '/blog': typeof BlogIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/planos': typeof PlanosRoute
+  '/planosv2': typeof Planosv2Route
+  '/sistema-para-boteco': typeof SistemaParaBotecoRoute
+  '/sistema-para-cafeteria': typeof SistemaParaCafeteriaRoute
+  '/sistema-para-choperia': typeof SistemaParaChoperiaRoute
+  '/sistema-para-padaria': typeof SistemaParaPadariaRoute
+  '/sistema-para-restaurante': typeof SistemaParaRestauranteRoute
+  '/blog/$slug': typeof BlogSlugRoute
+  '/blog/': typeof BlogIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/planos'
+    | '/planosv2'
+    | '/sistema-para-boteco'
+    | '/sistema-para-cafeteria'
+    | '/sistema-para-choperia'
+    | '/sistema-para-padaria'
+    | '/sistema-para-restaurante'
+    | '/blog/$slug'
+    | '/blog/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/planos'
+    | '/planosv2'
+    | '/sistema-para-boteco'
+    | '/sistema-para-cafeteria'
+    | '/sistema-para-choperia'
+    | '/sistema-para-padaria'
+    | '/sistema-para-restaurante'
+    | '/blog/$slug'
+    | '/blog'
+  id:
+    | '__root__'
+    | '/'
+    | '/planos'
+    | '/planosv2'
+    | '/sistema-para-boteco'
+    | '/sistema-para-cafeteria'
+    | '/sistema-para-choperia'
+    | '/sistema-para-padaria'
+    | '/sistema-para-restaurante'
+    | '/blog/$slug'
+    | '/blog/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  PlanosRoute: typeof PlanosRoute
+  Planosv2Route: typeof Planosv2Route
+  SistemaParaBotecoRoute: typeof SistemaParaBotecoRoute
+  SistemaParaCafeteriaRoute: typeof SistemaParaCafeteriaRoute
+  SistemaParaChoperiaRoute: typeof SistemaParaChoperiaRoute
+  SistemaParaPadariaRoute: typeof SistemaParaPadariaRoute
+  SistemaParaRestauranteRoute: typeof SistemaParaRestauranteRoute
+  BlogSlugRoute: typeof BlogSlugRoute
+  BlogIndexRoute: typeof BlogIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +169,83 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/planos': {
+      id: '/planos'
+      path: '/planos'
+      fullPath: '/planos'
+      preLoaderRoute: typeof PlanosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/planosv2': {
+      id: '/planosv2'
+      path: '/planosv2'
+      fullPath: '/planosv2'
+      preLoaderRoute: typeof Planosv2RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sistema-para-boteco': {
+      id: '/sistema-para-boteco'
+      path: '/sistema-para-boteco'
+      fullPath: '/sistema-para-boteco'
+      preLoaderRoute: typeof SistemaParaBotecoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sistema-para-cafeteria': {
+      id: '/sistema-para-cafeteria'
+      path: '/sistema-para-cafeteria'
+      fullPath: '/sistema-para-cafeteria'
+      preLoaderRoute: typeof SistemaParaCafeteriaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sistema-para-choperia': {
+      id: '/sistema-para-choperia'
+      path: '/sistema-para-choperia'
+      fullPath: '/sistema-para-choperia'
+      preLoaderRoute: typeof SistemaParaChoperiaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sistema-para-padaria': {
+      id: '/sistema-para-padaria'
+      path: '/sistema-para-padaria'
+      fullPath: '/sistema-para-padaria'
+      preLoaderRoute: typeof SistemaParaPadariaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sistema-para-restaurante': {
+      id: '/sistema-para-restaurante'
+      path: '/sistema-para-restaurante'
+      fullPath: '/sistema-para-restaurante'
+      preLoaderRoute: typeof SistemaParaRestauranteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/': {
+      id: '/blog/'
+      path: '/blog'
+      fullPath: '/blog/'
+      preLoaderRoute: typeof BlogIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/blog/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  PlanosRoute: PlanosRoute,
+  Planosv2Route: Planosv2Route,
+  SistemaParaBotecoRoute: SistemaParaBotecoRoute,
+  SistemaParaCafeteriaRoute: SistemaParaCafeteriaRoute,
+  SistemaParaChoperiaRoute: SistemaParaChoperiaRoute,
+  SistemaParaPadariaRoute: SistemaParaPadariaRoute,
+  SistemaParaRestauranteRoute: SistemaParaRestauranteRoute,
+  BlogSlugRoute: BlogSlugRoute,
+  BlogIndexRoute: BlogIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
