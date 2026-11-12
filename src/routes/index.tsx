@@ -1706,7 +1706,7 @@ const waybitTopSolutions: WaybitSolutionItem[] = [
     description: "Sistema de gestão para varejo",
     color: "#3BBCEC",
     logo: varejoLogo,
-    link: "#solucoes-segmentos",
+    link: "/dominus-varejo",
     isExternal: false,
   },
   {
@@ -1864,6 +1864,18 @@ function SolutionCard({
       >
         {cardInner}
       </a>
+    );
+  }
+
+  if (item.id === "varejo") {
+    return (
+      <Link
+        to="/dominus-varejo"
+        aria-label={`${item.title} - ${item.description}`}
+        className="flex h-full w-full cursor-pointer flex-col rounded-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+      >
+        {cardInner}
+      </Link>
     );
   }
 

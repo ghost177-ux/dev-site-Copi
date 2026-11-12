@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DominusVarejoRouteImport } from './routes/dominus-varejo'
 import { Route as PlanosRouteImport } from './routes/planos'
 import { Route as Planosv2RouteImport } from './routes/planosv2'
 import { Route as SistemaParaBotecoRouteImport } from './routes/sistema-para-boteco'
@@ -23,6 +24,11 @@ import { Route as BlogSlugRouteImport } from './routes/blog/$slug'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DominusVarejoRoute = DominusVarejoRouteImport.update({
+  id: '/dominus-varejo',
+  path: '/dominus-varejo',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PlanosRoute = PlanosRouteImport.update({
@@ -73,6 +79,7 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/dominus-varejo': typeof DominusVarejoRoute
   '/planos': typeof PlanosRoute
   '/planosv2': typeof Planosv2Route
   '/sistema-para-boteco': typeof SistemaParaBotecoRoute
@@ -85,6 +92,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/dominus-varejo': typeof DominusVarejoRoute
   '/planos': typeof PlanosRoute
   '/planosv2': typeof Planosv2Route
   '/sistema-para-boteco': typeof SistemaParaBotecoRoute
@@ -98,6 +106,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/dominus-varejo': typeof DominusVarejoRoute
   '/planos': typeof PlanosRoute
   '/planosv2': typeof Planosv2Route
   '/sistema-para-boteco': typeof SistemaParaBotecoRoute
@@ -112,6 +121,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/dominus-varejo'
     | '/planos'
     | '/planosv2'
     | '/sistema-para-boteco'
@@ -124,6 +134,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/dominus-varejo'
     | '/planos'
     | '/planosv2'
     | '/sistema-para-boteco'
@@ -136,6 +147,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/dominus-varejo'
     | '/planos'
     | '/planosv2'
     | '/sistema-para-boteco'
@@ -149,6 +161,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DominusVarejoRoute: typeof DominusVarejoRoute
   PlanosRoute: typeof PlanosRoute
   Planosv2Route: typeof Planosv2Route
   SistemaParaBotecoRoute: typeof SistemaParaBotecoRoute
@@ -167,6 +180,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dominus-varejo': {
+      id: '/dominus-varejo'
+      path: '/dominus-varejo'
+      fullPath: '/dominus-varejo'
+      preLoaderRoute: typeof DominusVarejoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/planos': {
@@ -237,6 +257,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DominusVarejoRoute: DominusVarejoRoute,
   PlanosRoute: PlanosRoute,
   Planosv2Route: Planosv2Route,
   SistemaParaBotecoRoute: SistemaParaBotecoRoute,
