@@ -46,6 +46,7 @@ import {
 import { Button } from "@/components/ui/button";
 import logoImg from "@/assets/logo.png";
 import { SpecialistDialog } from "@/components/SpecialistDialog";
+import { getFoodSegmentRoute, getRetailSegmentRoute } from "@/data/segmentMenuRoutes";
 
 interface HeaderProps {
   currentPath?: string;
@@ -71,21 +72,6 @@ const foodSegments: SegmentMenuItem[] = [
   { name: "Restaurante", icon: ChefHat },
   { name: "Sushibar", icon: Soup },
 ];
-
-const foodSegmentRoutes = {
-  Boteco: "/sistema-para-boteco",
-  Cafeteria: "/sistema-para-cafeteria",
-  Choperia: "/sistema-para-choperia",
-  Restaurante: "/sistema-para-restaurante",
-} as const;
-
-const getFoodSegmentRoute = (name: string) =>
-  name in foodSegmentRoutes
-    ? foodSegmentRoutes[name as keyof typeof foodSegmentRoutes]
-    : ("/planos" as const);
-
-const getRetailSegmentRoute = (name: string) =>
-  name === "Padaria" ? ("/sistema-para-padaria" as const) : ("/planos" as const);
 
 // 17 Segmentos de Varejo em Geral (Colunas: 6 na primeira, 6 na segunda e 5 na terceira)
 const retailSegments: SegmentMenuItem[] = [

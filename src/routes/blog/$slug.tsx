@@ -26,7 +26,7 @@ export const Route = createFileRoute("/blog/$slug")({
     const post = getBlogPostBySlug(params.slug);
     if (!post) {
       return {
-        meta: [{ title: "Artigo não encontrado | Blog Waybit" }],
+        meta: [{ title: "Artigo não encontrado | Blog Waybit" }, { name: "description", content: "Este artigo não está disponível no Blog Waybit." }, { property: "og:title", content: "Artigo não encontrado | Blog Waybit" }, { property: "og:description", content: "Este artigo não está disponível no Blog Waybit." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }],
       };
     }
     return {
@@ -35,8 +35,9 @@ export const Route = createFileRoute("/blog/$slug")({
         { name: "description", content: post.summary },
         { property: "og:title", content: `${post.title} | Blog Waybit` },
         { property: "og:description", content: post.summary },
-        { property: "og:image", content: post.image },
+        ...(post.image.startsWith("https://") ? [{ property: "og:image", content: post.image }, { name: "twitter:image", content: post.image }] : []),
         { property: "og:type", content: "article" },
+        { name: "twitter:card", content: "summary_large_image" },
       ],
     };
   },

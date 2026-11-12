@@ -87,6 +87,7 @@ export const Route = createFileRoute("/sistema-para-boteco")({
           "Comandas, mesas, cozinha, caixa, estoque e delivery conectados. Tudo que o seu boteco precisa para sair do papel e ter controle real da operação.",
       },
       { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: DominusFoodPage,
@@ -644,7 +645,7 @@ function DominusFoodPage() {
       );
 
       contentElements.forEach((element, index) => {
-        element.style.minHeight = previousMinHeights[index];
+        element.style.minHeight = previousMinHeights[index] ?? "";
       });
 
       setSuccessStoryContentHeight((currentHeight) =>
@@ -1264,7 +1265,7 @@ function DominusFoodPage() {
                 />
                 <span className="absolute inset-0 bg-black/20 transition-colors group-hover:bg-black/35" aria-hidden="true"></span>
                 <span className="absolute left-1/2 top-1/2 flex size-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-4 border-white/90 bg-black/70 text-white shadow-2xl transition-transform duration-300 group-hover:scale-110 sm:size-20" aria-hidden="true">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-play ml-1 fill-current sm:size-8" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-play ml-1 fill-current sm:size-8" aria-hidden="true">
                     <path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"></path>
                   </svg>
                 </span>
@@ -1273,7 +1274,7 @@ function DominusFoodPage() {
 
             <div className="min-w-0 text-center lg:text-left">
               <div className="section-eyebrow inline-flex items-center gap-2 rounded-full border border-[#FC4242]/25 bg-[#FC4242]/10 px-4 py-1.5 mb-5 sm:mb-6">
-                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-play fill-[#FC4242] text-[#FC4242]" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-play fill-[#FC4242] text-[#FC4242]" aria-hidden="true">
                   <path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"></path>
                 </svg>
                 <span className="fluid-caption font-bold uppercase tracking-wider text-[#FC4242]">Conheça o sistema</span>
@@ -1288,7 +1289,7 @@ function DominusFoodPage() {
               <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 text-left">
                 <div className="flex items-center gap-3">
                   <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-[#FC4242]/15 text-[#FC4242]">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-table-properties" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-table-properties" aria-hidden="true">
                       <path d="M15 3v18"></path><rect width="18" height="18" x="3" y="3" rx="2"></rect><path d="M21 9H3"></path><path d="M21 15H3"></path>
                     </svg>
                   </div>
@@ -1297,7 +1298,7 @@ function DominusFoodPage() {
 
                 <div className="flex items-center gap-3">
                   <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-[#FC4242]/15 text-[#FC4242]">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-square" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-message-square" aria-hidden="true">
                       <path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z"></path>
                     </svg>
                   </div>
@@ -1306,7 +1307,7 @@ function DominusFoodPage() {
 
                 <div className="flex items-center gap-3">
                   <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-[#FC4242]/15 text-[#FC4242]">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wifi" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-wifi" aria-hidden="true">
                       <path d="M12 20h.01"></path><path d="M2 8.82a15 15 0 0 1 20 0"></path><path d="M5 12.859a10 10 0 0 1 14 0"></path><path d="M8.5 16.429a5 5 0 0 1 7 0"></path>
                     </svg>
                   </div>
@@ -1315,7 +1316,7 @@ function DominusFoodPage() {
 
                 <div className="flex items-center gap-3">
                   <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-[#FC4242]/15 text-[#FC4242]">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-boxes" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-boxes" aria-hidden="true">
                       <path d="M2.97 12.92A2 2 0 0 0 2 14.63v3.24a2 2 0 0 0 .97 1.71l3 1.8a2 2 0 0 0 2.06 0L12 19v-5.5l-5-3-4.03 2.42Z"></path>
                       <path d="m7 16.5-4.74-2.85"></path><path d="m7 16.5 5-3"></path><path d="M7 16.5v5.17"></path>
                       <path d="M12 13.5V19l3.97 2.38a2 2 0 0 0 2.06 0l3-1.8a2 2 0 0 0 .97-1.71v-3.24a2 2 0 0 0-.97-1.71L17 10.5l-5 3Z"></path>
@@ -1334,7 +1335,7 @@ function DominusFoodPage() {
                 className="mt-8 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-[#63B628] px-6 py-3 font-bold fluid-body text-white shadow-md transition-all duration-300 hover:brightness-110 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#63B628]/60 focus-visible:ring-offset-2 sm:w-auto"
               >
                 Falar com especialista
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-arrow-right" aria-hidden="true">
                   <path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path>
                 </svg>
               </button>

@@ -100,6 +100,7 @@ export const Route = createFileRoute("/sistema-para-choperia")({
           "Controle de mesas e balcão, estoque, comanda eletrônica e relatórios para acompanhar os resultados da sua choperia.",
       },
       { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: DominusFoodPage,

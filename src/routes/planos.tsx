@@ -43,6 +43,10 @@ export const Route = createFileRoute("/planos")({
             name: "description",
             content: "Conheça os planos do Dominus Food para botecos, restaurantes e delivery.",
           },
+          { property: "og:title", content: "Planos Dominus Food | Waybit" },
+          { property: "og:description", content: "Conheça os planos do Dominus Food para botecos, restaurantes e delivery." },
+          { property: "og:type", content: "website" },
+          { name: "twitter:card", content: "summary_large_image" },
         ],
       };
     }
@@ -53,6 +57,10 @@ export const Route = createFileRoute("/planos")({
           name: "description",
           content: "Conheça os planos do Dominus para Varejo, Food e Auto-Center.",
         },
+        { property: "og:title", content: "Planos e Preços Dominus ERP | Waybit" },
+        { property: "og:description", content: "Conheça os planos do Dominus para Varejo, Food e Auto-Center." },
+        { property: "og:type", content: "website" },
+        { name: "twitter:card", content: "summary_large_image" },
       ],
     };
   },

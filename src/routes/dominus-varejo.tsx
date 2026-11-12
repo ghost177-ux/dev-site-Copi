@@ -58,6 +58,7 @@ export const Route = createFileRoute("/dominus-varejo")({
         content: "Gestão de estoque, vendas, financeiro e operações do comércio em um só lugar.",
       },
       { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: DominusVarejoPage,

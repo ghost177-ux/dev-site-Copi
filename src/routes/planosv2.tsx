@@ -12,7 +12,7 @@ import promoVarejoImg from "@/assets/varejo copy.png";
 export const Route = createFileRoute("/planosv2")({
   head: () => ({
     meta: [
-      { title: "Planos e Preços Dominus ERP | Waybit" },
+      { title: "Planos Dominus — Varejo, Food e Auto-Center | Waybit" },
       {
         name: "description",
         content: "Conheça os planos do Dominus para Varejo, Food e Auto-Center.",
@@ -345,7 +345,7 @@ function PlanCard({
           <h3 className="font-display text-[clamp(1.125rem,2.1vw,1.75rem)] font-bold uppercase leading-tight">
             {plan.name}
           </h3>
-          <PlanPrice price={price} originalPrice={originalPrice} />
+          <PlanPrice price={price} originalPrice={originalPrice ?? ""} />
         </div>
 
         {billingCycle === "anual" && (

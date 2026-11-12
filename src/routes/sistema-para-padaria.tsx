@@ -87,6 +87,7 @@ export const Route = createFileRoute("/sistema-para-padaria")({
           "Gestão integrada de vendas, PDV, estoque, compras, promoções e financeiro para padarias.",
       },
       { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: DominusVarejoPage,

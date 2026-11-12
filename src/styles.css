@@ -1249,3 +1249,25 @@
 @utility demonstracao-notebook {
   width: clamp(25%, calc(383px + 23.4cqw), 100%);
 }
+
+/* Product overview: same background as the Restaurant LP, scoped to this page. */
+@theme inline {
+  --color-food-depth: var(--food-depth);
+  --color-food-ink: var(--food-ink);
+}
+:root {
+  --food-depth: #2d090d;
+  --food-ink: #000000;
+  --food-overview-background: radial-gradient(72% 68% at 84% 28%, rgba(252,66,66,0.34) 0%, rgba(168,30,35,0.18) 38%, transparent 68%), radial-gradient(58% 62% at 10% 88%, rgba(221,51,55,0.24) 0%, transparent 65%), linear-gradient(135deg, #30090c 0%, #481014 38%, #2d090d 68%, #190507 100%);
+}
+.food-overview-backdrop { background: var(--food-overview-background); }
+.food-overview-scroll { scrollbar-color: color-mix(in srgb, var(--segment-food) 35%, transparent) color-mix(in srgb, var(--segment-food) 6%, transparent); }
+.dominus-food-overview { letter-spacing: 0; }
+.dominus-food-overview main > section h2 { font-size: 2rem; }
+.dominus-food-overview main > section h3 { font-size: 1.125rem; }
+.dominus-food-overview main > section p:not(.fluid-caption):not(.fluid-legal) { font-size: 1rem; }
+.dominus-food-overview main .section-eyebrow { letter-spacing: 0; }
+.dominus-food-overview header > div { flex-wrap: wrap; }
+.dominus-food-overview header > div > div { flex-wrap: wrap; }
+@media (min-width: 770px) { .dominus-food-overview main > section h2 { font-size: 2.5rem; } }
+@media (prefers-reduced-motion: reduce) { .dominus-food-overview *, .dominus-food-overview *::before, .dominus-food-overview *::after { transition: none; animation: none; scroll-behavior: auto; } }
