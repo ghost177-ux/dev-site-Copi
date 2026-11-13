@@ -226,6 +226,7 @@ const planosFood = [
     nome: "FIT FOOD",
     mensal: "199,00",
     anual: "165,00",
+    anualOriginal: "3.388,00",
     faturamento: "Faturamento até 60 mil/mês",
     pdvs: "2 PDVs",
     descricao: "Ideal para botecos e petiscarias em fase de estruturação e saída do papel.",
@@ -244,6 +245,7 @@ const planosFood = [
     nome: "BASIC FOOD",
     mensal: "299,00",
     anual: "249,00",
+    anualOriginal: "3.588,00",
     faturamento: "Faturamento de 60 a 120 mil/mês",
     pdvs: "PDVs Ilimitados",
     descricao: "O plano mais equilibrado para botecos movimentados com salão e balcão cheios.",
@@ -262,6 +264,7 @@ const planosFood = [
     nome: "FULL FOOD",
     mensal: "449,00",
     anual: "374,00",
+    anualOriginal: "5.388,00",
     faturamento: "Faturamento de 120 a 200 mil/mês",
     pdvs: "PDVs Ilimitados",
     descricao: "Gestão robusta para estabelecimentos com alto giro, cozinha rápida e delivery.",
@@ -1495,14 +1498,29 @@ function DominusFoodPage() {
 
                         {/* Bloco de Preço */}
                         <div className="py-4 border-y border-white/10 mb-4">
+                          {billingCycle === "anual" && plano.anualOriginal && (
+                            <div className="text-xs font-semibold text-white/70 line-through mb-1">
+                              R$ {plano.anualOriginal}
+                            </div>
+                          )}
                           <div className="flex items-baseline gap-1 text-white">
                             {preco !== "Consulte" ? (
                               <>
+                                {billingCycle === "anual" && (
+                                  <span className="font-display text-lg font-extrabold">12X</span>
+                                )}
                                 <span className="text-xs font-semibold text-white/70">R$</span>
                                 <span className="font-display text-3xl font-extrabold tracking-tight">
-                                  {preco}
+                                  {billingCycle === "anual" ? preco.split(",")[0] : preco}
                                 </span>
-                                <span className="text-xs text-white/60 font-medium">/mês</span>
+                                {billingCycle === "anual" ? (
+                                  <span className="flex flex-col items-start self-center leading-none">
+                                    <span className="text-xs font-extrabold">,{preco.split(",")[1]}</span>
+                                    <span className="text-xs text-white/60 font-medium">/mês</span>
+                                  </span>
+                                ) : (
+                                  <span className="text-xs text-white/60 font-medium">/mês</span>
+                                )}
                               </>
                             ) : (
                               <span className="font-display text-2xl font-extrabold text-white">
