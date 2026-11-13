@@ -216,16 +216,17 @@ const funcionalidades = [
   },
 ];
 
-// ─── PLANOS FOOD REAIS DO SISTEMA (Alinhados com /planos?segmento=food) ──────
+// ─── PLANOS VAREJO REAIS DO SISTEMA (Alinhados com /planos?segmento=varejo) ──────
 const planosVarejo = [
   {
     id: "fit-varejo",
     nome: "FIT VAREJO",
     mensal: "199,00",
     anual: "165,84",
+    anualOriginal: "2.388,00",
     faturamento: "Faturamento até 30 mil por mês",
     pdvs: "2 PDVs",
-    descricao: "Para operações com faturamento até R$ 30 mil por mês.",
+    descricao: "Ideal para padarias em fase de estruturação e saindo do papel.",
     popular: false,
   },
   {
@@ -233,9 +234,10 @@ const planosVarejo = [
     nome: "BASIC VAREJO",
     mensal: "399,00",
     anual: "332,50",
+    anualOriginal: "4.788,00",
     faturamento: "Faturamento de 30 a 100 mil por mês",
     pdvs: "4 PDVs",
-    descricao: "Para operações com faturamento de R$ 30 mil a R$ 100 mil por mês.",
+    descricao: "O plano pensado para Padarias com fluxo movimentado.",
     popular: true,
   },
   {
@@ -243,9 +245,10 @@ const planosVarejo = [
     nome: "FULL VAREJO",
     mensal: "599,00",
     anual: "499,17",
+    anualOriginal: "7.188,00",
     faturamento: "Faturamento de 100 a 200 mil por mês",
     pdvs: "8 PDVs",
-    descricao: "Para operações com faturamento de R$ 100 mil a R$ 200 mil por mês.",
+    descricao: "Gestão robusta para Padarias com alto giro e movimentação.",
     popular: false,
   },
   {
@@ -253,15 +256,16 @@ const planosVarejo = [
     nome: "VIP VAREJO",
     mensal: "799,00",
     anual: "665,84",
+    anualOriginal: "9.588,00",
     faturamento: "Faturamento acima de 200 mil por mês",
     pdvs: "+ de 8 PDVs",
-    descricao: "Para operações com faturamento acima de R$ 200 mil por mês.",
+    descricao: "Solução sob medida para grandes padarias ou franquias.",
     popular: false,
   },
 ];
 
-// ─── PROVA SOCIAL E CLIENTES (Seção 7 da documentação LP_RESTAURANTE.md) ──────
-const foodVideoCases = [
+// ─── PROVA SOCIAL E CLIENTES (Seção 7 da documentação LP_VAREJO.md) ──────
+const varejoVideoCases = [
   {
     id: "padaria-oliveira",
     cliente: "Padaria Oliveira",
@@ -459,7 +463,7 @@ function DominusVarejoPage() {
   const [billingCycle, setBillingCycle] = useState<"anual" | "mensal">("anual");
   const [activeFaqIndex, setActiveFaqIndex] = useState(0);
   const [activeRotinaTab, setActiveRotinaTab] = useState(0);
-  const [activeFoodVideo, setActiveFoodVideo] = useState<(typeof foodVideoCases)[number] | null>(null);
+  const [activeFoodVideo, setActiveFoodVideo] = useState<(typeof varejoVideoCases)[number] | null>(null);
   const [isIntroVideoOpen, setIsIntroVideoOpen] = useState(false);
   const [isSuccessStoriesDesktop, setIsSuccessStoriesDesktop] = useState(false);
   const [successStoryContentHeight, setSuccessStoryContentHeight] = useState<number | null>(null);
@@ -950,7 +954,7 @@ function DominusVarejoPage() {
                 aria-label="Case de sucesso da Padaria Oliveira"
                 tabIndex={0}
               >
-                {foodVideoCases.map((caseItem) => (
+                {varejoVideoCases.map((caseItem) => (
                   <div
                     key={caseItem.id}
                     className="group relative flex h-full flex-col justify-between rounded-3xl transition-all duration-300 hover:-translate-y-1"
@@ -1373,7 +1377,7 @@ function DominusVarejoPage() {
                   return (
                     <div
                       key={plano.id}
-                      className="group relative flex w-[min(20rem,calc(100vw-3rem))] shrink-0 snap-start flex-col justify-between rounded-2xl border border-white/15 bg-black/40 p-6 backdrop-blur-md transition-all duration-300 hover:scale-[1.02] hover:border-[#3BBCEC] hover:bg-[#073d57]/90 hover:shadow-2xl hover:ring-2 hover:ring-[#3BBCEC]/50 lg:w-auto"
+                      className="group isolate relative flex w-[min(20rem,calc(100vw-3rem))] shrink-0 snap-start flex-col justify-between rounded-2xl border border-white/15 bg-black/40 p-6 backdrop-blur-md transition-all duration-300 hover:scale-[1.02] hover:border-[#3BBCEC] hover:bg-[#073d57]/90 hover:shadow-2xl hover:ring-2 hover:ring-[#3BBCEC]/50 lg:w-auto"
                     >
 
                       <div>
@@ -1381,11 +1385,6 @@ function DominusVarejoPage() {
                           <h3 className="font-display font-extrabold text-lg text-white">
                             {plano.nome}
                           </h3>
-                          {billingCycle === "anual" && (
-                            <span className="rounded-md border border-[#3BBCEC] bg-transparent px-2 py-0.5 text-[11px] font-bold text-[#3BBCEC] transition-colors duration-300 group-hover:border-[#3BBCEC] group-hover:bg-[#3BBCEC] group-hover:text-white">
-                              até 12x
-                            </span>
-                          )}
                         </div>
 
                         <p className="text-xs text-white/60 min-h-[32px] leading-snug mb-4">
@@ -1394,9 +1393,17 @@ function DominusVarejoPage() {
 
                         {/* Bloco de Preço */}
                         <div className="py-4 border-y border-white/10 mb-4">
+                          {billingCycle === "anual" && plano.anualOriginal && (
+                            <div className="origin-left text-base font-semibold text-white/70 line-through mb-1 transition-all duration-300 group-hover:scale-[1.03] group-hover:font-bold group-hover:text-[#FFFFFF]">
+                              R$ {plano.anualOriginal}
+                            </div>
+                          )}
                           <div className="flex items-baseline gap-1 text-white">
                             {preco !== "Consulte" ? (
                               <>
+                                {billingCycle === "anual" && (
+                                  <span className="font-display text-lg font-extrabold">12X</span>
+                                )}
                                 <span className="text-xs font-semibold text-white/70">R$</span>
                                 <span className="font-display text-3xl font-extrabold tracking-tight">
                                   {preco}
@@ -1412,7 +1419,7 @@ function DominusVarejoPage() {
                         </div>
 
                         {/* Lista de Recursos */}
-                        <ul className="flex flex-col gap-2 mb-6 text-xs text-white/80">
+                        <ul className="flex flex-col gap-2 mb-6 text-sm text-white/80">
                           {[plano.faturamento, plano.pdvs].map((item) => (
                             <li key={item} className="flex items-start gap-2">
                               <CheckCircle2

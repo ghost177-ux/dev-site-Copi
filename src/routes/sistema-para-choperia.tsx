@@ -164,6 +164,7 @@ const planosFood = [
     nome: "FIT FOOD",
     mensal: "199,00",
     anual: "165,00",
+    anualOriginal: "3.388,00",
     faturamento: "Faturamento até 60 mil/mês",
     pdvs: "2 PDVs",
     descricao: "Ideal para choperias e bistrôs em fase de estruturação e organização dos processos.",
@@ -182,6 +183,7 @@ const planosFood = [
     nome: "BASIC FOOD",
     mensal: "299,00",
     anual: "249,00",
+    anualOriginal: "3.588,00",
     faturamento: "Faturamento de 60 a 120 mil/mês",
     pdvs: "PDVs Ilimitados",
     descricao: "O plano mais equilibrado para choperias com salão movimentado, comanda mobile e delivery.",
@@ -200,6 +202,7 @@ const planosFood = [
     nome: "FULL FOOD",
     mensal: "449,00",
     anual: "374,00",
+    anualOriginal: "5.388,00",
     faturamento: "Faturamento de 120 a 200 mil/mês",
     pdvs: "PDVs Ilimitados",
     descricao: "Gestão completa para estabelecimentos com alto giro, cozinha rápida (KDS) e delivery.",
@@ -1177,7 +1180,7 @@ function DominusFoodPage() {
                           <h3 className="font-display font-extrabold text-lg text-white">
                             {plano.nome}
                           </h3>
-                          {billingCycle === "anual" && (
+                          {billingCycle === "anual" && plano.anual === "Consulte" && (
                             <span className="rounded-md border border-[#FC4242] bg-transparent px-2 py-0.5 text-[11px] font-bold text-[#FC4242] transition-colors duration-300 group-hover:border-[#FC4242] group-hover:bg-[#FC4242] group-hover:text-white">
                               até 12x
                             </span>
@@ -1190,9 +1193,17 @@ function DominusFoodPage() {
 
                         {/* Bloco de Preço */}
                         <div className="py-4 border-y border-white/10 mb-4">
+                          {billingCycle === "anual" && plano.anualOriginal && (
+                            <div className="origin-left text-base font-semibold text-white/70 line-through mb-1 transition-all duration-300 group-hover:scale-[1.03] group-hover:font-bold group-hover:text-[#FFFFFF]">
+                              R$ {plano.anualOriginal}
+                            </div>
+                          )}
                           <div className="flex items-baseline gap-1 text-white">
                             {preco !== "Consulte" ? (
                               <>
+                                {billingCycle === "anual" && (
+                                  <span className="font-display text-lg font-extrabold">12X</span>
+                                )}
                                 <span className="text-xs font-semibold text-white/70">R$</span>
                                 <span className="font-display text-3xl font-extrabold tracking-tight">
                                   {preco}
@@ -1208,7 +1219,7 @@ function DominusFoodPage() {
                         </div>
 
                         {/* Lista de Recursos */}
-                        <ul className="flex flex-col gap-2 mb-6 text-xs text-white/80">
+                        <ul className="flex flex-col gap-2 mb-6 text-sm text-white/80">
                           {[plano.faturamento, plano.pdvs].map((item) => (
                             <li key={item} className="flex items-start gap-2">
                               <CheckCircle2

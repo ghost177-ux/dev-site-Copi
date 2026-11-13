@@ -42,9 +42,12 @@ import kitchenImage from "@/assets/KDS.avif";
 import waiterImage from "@/assets/Garçom, ticket e POS.avif";
 import { Button } from "@/components/ui/button";
 import { dominusFoodPlans } from "@/data/dominusFoodPlans";
+import { getFoodSegmentRoute } from "@/data/segmentMenuRoutes";
 import dashboardImage from "@/assets/Dashboard.avif";
 import inventoryImage from "@/assets/Controle de estoque.avif";
 import pointOfSaleImage from "@/assets/PDV Rápido.png";
+import dominusIaProductImage from "@/assets/Dominus IA.avif";
+import logoDominusIa from "@/assets/logo Dominus-IA.avif";
 
 export const Route = createFileRoute("/dominus-food")({
   head: () => ({
@@ -109,6 +112,53 @@ const faqs = [
   { question: "O sistema possui gestão financeira e relatórios?", answer: "Sim. O Dominus Food oferece controle financeiro e relatórios para acompanhar faturamento, custos e indicadores do estabelecimento em tempo real." },
   { question: "O Dominus Food se integra ao delivery?", answer: "Sim. O Dominus Food possui integração com o iFood e conta com o Bitfood, plataforma própria de delivery. Consulte a equipe sobre as condições e a disponibilidade para sua operação." },
 ];
+
+function DominusIaSection({ onOpenSpecialist }: {
+  onOpenSpecialist: () => void;
+}) {
+  return (
+    <section
+      id="dominus-ia-food"
+      className=" w-full border-t border-border bg-white"
+    >
+      <div className="landing-page-container">
+        <div
+          className="grid w-full min-w-0 grid-cols-1 items-center gap-10 rounded-3xl border border-[#549192]/30 p-6 shadow-xl sm:p-8 lg:grid-cols-2 lg:gap-12 lg:p-12"
+          style={{
+            background: "radial-gradient(ellipse 55% 45% at 15% 80%, rgba(113,198,187,0.45) 0%, transparent 60%), radial-gradient(ellipse 70% 60% at 80% 30%, rgba(113,198,187,0.8) 0%, transparent 65%), linear-gradient(135deg, #28595B 0%, color-mix(in srgb, #28595B 70%, #71C6BB) 35%, #71C6BB 65%, #28595B 100%)"
+          }}
+        >
+          <div className="flex h-full min-w-0 flex-col items-start justify-center gap-5 text-left sm:gap-6">
+            <div className="flex items-center gap-4 sm:gap-5">
+              <img src={logoDominusIa} alt="Dominus IA" className="h-12 w-auto max-w-[60%] object-contain sm:h-16" />
+            </div>
+            <h3 className="font-display fluid-h3 font-extrabold leading-snug text-white">Inteligência Artificial na gestão de estoque</h3>
+            <p className="fluid-body font-medium leading-relaxed text-white">
+              A Waybit desenvolveu o Dominus IA para apoiar as tarefas mais críticas do estoque:
+              leitura e entrada automatizada de notas fiscais, conferência de contagens, cálculo
+              do Custo de Mercadorias Vendidas (CMV) e análise preditiva de ruptura.
+            </p>
+            <ul className="grid w-full grid-cols-1 gap-3 sm:grid-cols-2">
+              {["Entrada ágil de NF-e de fornecedores", "Análise de margem e CMV por porção", "Alertas para evitar falta de insumos", "Mais precisão nas compras da semana"].map((benefit) => (
+                <li key={benefit} className="flex items-start gap-2 fluid-secondary font-medium text-white">
+                  <CheckCircle2 size={16} className="mt-0.5 shrink-0 text-[#173C3D]" aria-hidden="true" />
+                  <span>{benefit}</span>
+                </li>
+              ))}
+            </ul>
+            <button type="button" onClick={onOpenSpecialist} className="inline-flex min-h-12 max-w-full items-center rounded-xl bg-[#173C3D] px-6 py-3 text-left font-bold fluid-btn text-white shadow-md transition-all hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#80CCC3] focus-visible:ring-offset-2">Saber mais sobre o Dominus IA</button>
+            <p className="fluid-legal font-medium leading-relaxed text-white">
+              * Módulo avançado sujeito a plano e disponibilidade. Consulte a equipe comercial para saber mais.
+            </p>
+          </div>
+          <div className="flex min-w-0 items-center justify-center">
+            <img src={dominusIaProductImage} alt="Dominus IA em notebook e smartphone" className="block h-auto w-full max-w-full object-contain" loading="lazy" decoding="async" />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 function DominusFoodOverviewPage() {
   const [specialistOpen, setSpecialistOpen] = useState(false);
@@ -182,20 +232,49 @@ function DominusFoodOverviewPage() {
                 Recursos para organizar a gestão de restaurantes, bares, botecos, cafeterias e outros estabelecimentos de alimentação.
               </p>
             </div>
-            <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4 xl:grid-cols-5">
-              {segments.map((segment) => (
-                <li
-                  key={segment.name}
-                  className="flex min-h-16 items-center gap-3 rounded-xl border border-border bg-card p-3 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-segment-food/40 hover:shadow-md sm:p-4"
-                >
-                  <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-segment-food/10 text-segment-food">
-                    <segment.icon size={17} aria-hidden="true" />
-                  </span>
-                  <span className="fluid-secondary font-semibold leading-snug text-foreground">
-                    {segment.name}
-                  </span>
-                </li>
-              ))}
+            <ul className="mx-auto flex flex-wrap justify-center gap-3 sm:gap-4">
+              {segments.map((segment) => {
+                const SegmentIcon = segment.icon;
+                const routeName =
+                  segment.name === "Bares e botecos"
+                    ? "Boteco"
+                    : segment.name === "Cafeterias"
+                      ? "Cafeteria"
+                      : segment.name === "Choperias"
+                        ? "Choperia"
+                        : segment.name === "Restaurantes"
+                          ? "Restaurante"
+                          : undefined;
+                const cardContent = (
+                  <>
+                    <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-segment-food/10 text-segment-food">
+                      <SegmentIcon size={17} aria-hidden="true" />
+                    </span>
+                    <span className="fluid-secondary font-semibold leading-snug text-foreground">
+                      {segment.name}
+                    </span>
+                  </>
+                );
+                const cardClassName =
+                  "flex min-h-16 w-full items-center gap-3 rounded-xl border border-border bg-card p-3 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-segment-food/40 hover:shadow-md sm:p-4";
+                const widthClassName =
+                  "w-[calc(50%_-_0.375rem)] sm:w-[calc(33.333%_-_0.667rem)] lg:w-[calc(25%_-_0.75rem)] xl:w-[calc(20%_-_0.8rem)]";
+
+                return (
+                  <li key={segment.name} className={widthClassName}>
+                    {routeName ? (
+                      <Link
+                        to={getFoodSegmentRoute(routeName)}
+                        className={`${cardClassName} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-segment-food/60 focus-visible:ring-offset-2`}
+                      >
+                        {cardContent}
+                      </Link>
+                    ) : (
+                      <div className={cardClassName}>{cardContent}</div>
+                    )}
+                  </li>
+                );
+              })}
             </ul>
           </div>
         </section>
@@ -255,7 +334,11 @@ function DominusFoodOverviewPage() {
           </div>
         </section>
 
-        <section id="funcionalidades" className="w-full border-b border-border bg-background">
+        {/* ─── DESTAQUE DOMINUS IA — GESTÃO INTELIGENTE DE ESTOQUE ─── */}
+        <DominusIaSection onOpenSpecialist={() => setSpecialistOpen(true)} />
+
+        {/* ───  FUNCIONALIDADES DOMINUS FOOD ─── */}
+        <section id="funcionalidades" className="w-full border-t border-border border-b border-border bg-background">
           <div className="landing-page-container">
             <div className="section-intro mx-auto max-w-4xl text-center">
               <div className="section-eyebrow border border-segment-food/30 bg-segment-food/10 text-segment-food">
@@ -353,11 +436,11 @@ function DominusFoodOverviewPage() {
                     onClick={() => setBillingCycle(cycle)}
                     className={`rounded-lg px-4 py-1.5 text-xs font-semibold transition-all sm:text-sm ${
                       billingCycle === cycle
-                        ? "bg-segment-food font-bold text-primary-foreground shadow-md"
-                        : "text-primary-foreground/70 hover:text-primary-foreground"
+                        ? "bg-segment-food font-bold text-primary-foreground shadow-md hover:bg-segment-food hover:text-primary-foreground"
+                        : "text-primary-foreground/70 hover:bg-transparent hover:text-white!"
                     }`}
                   >
-                    {cycle === "anual" ? "Anual" : "Mensal"}
+                    {cycle === "anual" ? "Anual (Desconto especial)" : "Mensal"}
                   </Button>
                 ))}
               </div>
@@ -372,51 +455,82 @@ function DominusFoodOverviewPage() {
             >
               <div className="flex w-max gap-5 pr-5 sm:gap-6 sm:pr-6 lg:grid lg:w-full lg:grid-cols-4 lg:pr-0">
                 {dominusFoodPlans.map((plan) => {
-                  const price = billingCycle === "anual" ? plan.annual : plan.monthly;
+                  const preco = billingCycle === "anual" ? plan.anual : plan.mensal;
                   return (
-                    <article
+                    <div
                       key={plan.id}
-                      className="group relative flex w-[min(20rem,calc(100vw-3rem))] shrink-0 snap-start flex-col justify-between rounded-2xl border border-primary-foreground/15 bg-food-ink/40 p-6 backdrop-blur-md transition-all duration-300 hover:scale-[1.02] hover:border-segment-food hover:bg-food-depth/90 hover:shadow-2xl hover:ring-2 hover:ring-segment-food/50 lg:w-auto"
+                      className="group relative flex w-[min(20rem,calc(100vw-3rem))] shrink-0 snap-start flex-col justify-between rounded-2xl border border-white/15 bg-black/40 p-6 backdrop-blur-md transition-all duration-300 hover:scale-[1.02] hover:border-[#FC4242] hover:bg-[#2d0909]/90 hover:shadow-2xl hover:ring-2 hover:ring-[#FC4242]/50 lg:w-auto"
                     >
+
                       <div>
-                        <div className="mb-3 flex items-center justify-between gap-2">
-                          <h3 className="font-display text-lg font-extrabold text-primary-foreground">
-                            {plan.name}
+                        <div className="flex items-center justify-between mb-3">
+                          <h3 className="font-display font-extrabold text-lg text-white">
+                            {plan.nome}
                           </h3>
-                          {billingCycle === "anual" && plan.annual !== "Consulte" && (
-                            <span className="rounded-md border border-segment-food px-2 py-0.5 text-[11px] font-bold text-segment-food">
-                              até 12x no cartão
-                            </span>
+                        </div>
+
+                        <p className="text-xs text-white/60 min-h-[32px] leading-snug mb-4">
+                          {plan.descricao}
+                        </p>
+
+                        {/* Bloco de Preço */}
+                        <div className="py-4 border-y border-white/10 mb-4">
+                          {billingCycle === "anual" && plan.valorCheio && (
+                            <div className="origin-left text-base font-semibold text-white/70 line-through mb-1 transition-all duration-300 group-hover:scale-[1.03] group-hover:font-bold group-hover:text-[#FFFFFF]">
+                              R$ {plan.valorCheio}
+                            </div>
                           )}
-                        </div>
-                        <div className="mb-4 min-h-8 text-xs leading-snug text-primary-foreground/60">
-                          {plan.revenue}
-                        </div>
-                        <div className="mb-4 border-y border-primary-foreground/10 py-4">
-                          <div className="flex items-baseline gap-1 text-primary-foreground">
-                            {price === "Consulte" ? <span className="font-display text-2xl font-extrabold">Sob consulta</span> : <><span className="text-xs font-semibold">R$</span><span className="font-display text-3xl font-extrabold">{price}</span><span className="text-xs">/mês</span></>}
+                          <div className="flex items-baseline gap-1 text-white">
+                            {preco !== "Consulte" ? (
+                              <>
+                                {billingCycle === "anual" && (
+                                  <span className="font-display text-lg font-extrabold">12X</span>
+                                )}
+                                <span className="text-xs font-semibold text-white/70">R$</span>
+                                <span className="font-display text-3xl font-extrabold tracking-tight">
+                                  {billingCycle === "anual" ? preco.split(",")[0] : preco}
+                                </span>
+                                {billingCycle === "anual" ? (
+                                  <span className="flex flex-col items-start self-center leading-none">
+                                    <span className="text-xs font-extrabold">,{preco.split(",")[1]}</span>
+                                    <span className="text-xs text-white/60 font-medium">/mês</span>
+                                  </span>
+                                ) : (
+                                  <span className="text-xs text-white/60 font-medium">/mês</span>
+                                )}
+                              </>
+                            ) : (
+                              <span className="font-display text-2xl font-extrabold text-white">
+                                Sob Consulta
+                              </span>
+                            )}
                           </div>
                         </div>
-                        <ul className="mb-6 flex flex-col gap-2 text-xs text-primary-foreground/80">
-                          <li className="flex items-start gap-2">
-                            <CheckCircle2
-                              size={13}
-                              className="mt-0.5 shrink-0 text-segment-food"
-                              aria-hidden="true"
-                            />
-                            <span>{plan.terminals}</span>
-                          </li>
+
+                        {/* Lista de Recursos */}
+                        <ul className="flex flex-col gap-2 mb-6 text-sm text-white/80">
+                          {[plan.faturamento, plan.pdvs].map((item) => (
+                            <li key={item} className="flex items-start gap-2">
+                              <CheckCircle2
+                                size={13}
+                                className="mt-0.5 shrink-0 text-[#FC4242]"
+                                aria-hidden="true"
+                              />
+                              <span>{item}</span>
+                            </li>
+                          ))}
                         </ul>
                       </div>
-                      <Button variant="ghost"
-                        type="button"
-                        onClick={() => setSpecialistOpen(true)}
-                        className="inline-flex min-h-10 w-full items-center justify-center gap-1.5 rounded-xl border border-primary-foreground/25 bg-card/10 text-xs font-bold text-primary-foreground transition-all duration-200 hover:border-transparent hover:bg-segment-food hover:shadow-md"
+
+                      <Link
+                        to="/planos"
+                        search={{ segmento: "food" }}
+                        className="inline-flex min-h-10 w-full items-center justify-center gap-1.5 rounded-xl border border-white/25 bg-white/10 text-xs font-bold text-white transition-all duration-200 hover:bg-[#FC4242] group-hover:border-transparent group-hover:bg-[#FC4242] group-hover:shadow-md group-hover:hover:bg-[#FC4242] group-hover:hover:brightness-110"
                       >
-                        Falar sobre este plano
-                        <ArrowRight size={13} aria-hidden="true" />
-                      </Button>
-                    </article>
+                        <span>Ver detalhes deste plano</span>
+                        <ArrowRight size={13} />
+                      </Link>
+                    </div>
                   );
                 })}
               </div>
@@ -498,7 +612,7 @@ function DominusFoodOverviewPage() {
           </div>
         </section>
 
-        <section id="duvidas" className="w-full border-b border-border bg-surface-subtle/50">
+        <section id="duvidas" className="w-full border-t border-border border-b border-border bg-surface-subtle/50">
           <div className="landing-page-container">
             <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-14">
               <div className="section-intro text-center lg:text-left">

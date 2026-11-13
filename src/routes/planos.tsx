@@ -366,9 +366,6 @@ function PlanPrice({
       </span>
       {amount ? (
         <span className="flex items-baseline gap-[clamp(2px,0.35vw,6px)] whitespace-nowrap">
-          {showInstallments ? (
-            <span className="font-display text-[clamp(0.95rem,1.4vw,1.15rem)] font-bold">12X</span>
-          ) : null}
           <span className="text-[clamp(0.95rem,1.4vw,1.15rem)] font-semibold">R$</span>
           <span className="font-display text-[clamp(2.6rem,4.1vw,3.6rem)] font-bold leading-[0.9] tracking-tight">
             {amount.whole}
@@ -422,7 +419,7 @@ function PlanCard({
 
         {billingCycle === "anual" && (
           <div className="plan-installments rounded-bl-[10px] rounded-br-[10px] bg-[#2F2F2F] px-3 py-[clamp(7px,0.7vw,10px)] text-center text-[clamp(0.75rem,0.95vw,0.9375rem)] font-bold tracking-wide text-white">
-            Até 12X no cartão
+            Em 12X no cartão
           </div>
         )}
       </div>
@@ -494,7 +491,7 @@ function PlanosV2Page() {
   const [isBannerHovered, setIsBannerHovered] = useState(false);
   const [isBannerInteractionPaused, setIsBannerInteractionPaused] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
-  const [billingCycle, setBillingCycle] = useState<BillingCycle>("mensal");
+  const [billingCycle, setBillingCycle] = useState<BillingCycle>("anual");
   const [specialistOpen, setSpecialistOpen] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState("");
   const [activeCard, setActiveCard] = useState(0);
@@ -742,7 +739,7 @@ function PlanosV2Page() {
                 aria-label="Selecione a periodicidade"
                 className="inline-flex shrink-0 items-center rounded-xl border border-border bg-surface-subtle p-1"
               >
-                {(["mensal", "anual"] as const).map((cycle) => {
+                {(["anual", "mensal"] as const).map((cycle) => {
                   const active = billingCycle === cycle;
                   return (
                     <button

@@ -29,16 +29,20 @@ import {
   ShoppingCart,
   Store,
   Wrench,
+  Star,
 } from "lucide-react";
 import { useState } from "react";
 
 import { DominusVarejoHeader } from "@/components/DominusVarejoHeader";
 import { FullFunnelBookingModal } from "@/components/FullFunnelBookingModal";
 import { SpecialistDialog } from "@/components/SpecialistDialog";
+import { getRetailSegmentRoute } from "@/data/segmentMenuRoutes";
 import varejoHeroImage from "@/assets/VarejoFN.avif";
 import dashboardImage from "@/assets/Dashboard.avif";
 import inventoryImage from "@/assets/Controle de estoque.avif";
 import pointOfSaleImage from "@/assets/PDV.avif";
+import dominusIaProductImage from "@/assets/Dominus IA.avif";
+import logoDominusIa from "@/assets/logo Dominus-IA.avif";
 
 export const Route = createFileRoute("/dominus-varejo")({
   head: () => ({
@@ -154,40 +158,50 @@ const features = [
   },
 ];
 
-const varejoPlans = [
+// ─── PLANOS VAREJO REAIS DO SISTEMA (Alinhados com /planos?segmento=varejo) ──────
+const planosVarejo = [
   {
     id: "fit-varejo",
-    name: "FIT VAREJO",
-    monthly: "199,00",
-    annual: "165,84",
-    revenue: "Faturamento até 30 mil por mês",
-    terminals: "2 PDVs",
+    nome: "FIT VAREJO",
+    mensal: "199,00",
+    anual: "165,84",
+    anualOriginal: "2.388,00",
+    faturamento: "Faturamento até 30 mil por mês",
+    pdvs: "2 PDVs",
+    descricao: "Ideal para empresas em fase de estruturação e saindo do papel.",
   },
   {
     id: "basic-varejo",
-    name: "BASIC VAREJO",
-    monthly: "399,00",
-    annual: "332,50",
-    revenue: "Faturamento de 30 a 100 mil por mês",
-    terminals: "4 PDVs",
+    nome: "BASIC VAREJO",
+    mensal: "399,00",
+    anual: "332,50",
+    anualOriginal: "4.788,00",
+    faturamento: "Faturamento de 30 a 100 mil por mês",
+    pdvs: "4 PDVs",
+    descricao: "O plano pensado para empresas com fluxo movimentado.",
   },
   {
     id: "full-varejo",
-    name: "FULL VAREJO",
-    monthly: "599,00",
-    annual: "499,17",
-    revenue: "Faturamento de 100 a 200 mil por mês",
-    terminals: "8 PDVs",
+    nome: "FULL VAREJO",
+    mensal: "599,00",
+    anual: "499,17",
+    anualOriginal: "7.188,00",
+    faturamento: "Faturamento de 100 a 200 mil por mês",
+    pdvs: "8 PDVs",
+    descricao: "Gestão robusta para empresas com alto giro e movimentação.",
   },
   {
     id: "vip-varejo",
-    name: "VIP VAREJO",
-    monthly: "799,00",
-    annual: "665,84",
-    revenue: "Faturamento acima de 200 mil por mês",
-    terminals: "+ de 8 PDVs",
+    nome: "VIP VAREJO",
+    mensal: "799,00",
+    anual: "665,84",
+    anualOriginal: "9.588,00",
+    faturamento: "Faturamento acima de 200 mil por mês",
+    pdvs: "+ de 8 PDVs",
+    descricao: "Solução sob medida para grandes empresas ou franquias.",
   },
 ];
+
 
 const faqs = [
   {
@@ -211,6 +225,54 @@ const faqs = [
       "Sim. O Dominus Varejo oferece recursos de controle financeiro e de caixa, permitindo acompanhar as movimentações financeiras da empresa.",
   },
 ];
+
+
+function DominusIaSection({ onOpenSpecialist }: {
+  onOpenSpecialist: () => void;
+}) {
+  return (
+    <section
+      id="dominus-ia-food"
+      className=" w-full border-t border-border bg-white"
+    >
+      <div className="landing-page-container">
+        <div
+          className="grid w-full min-w-0 grid-cols-1 items-center gap-10 rounded-3xl border border-[#549192]/30 p-6 shadow-xl sm:p-8 lg:grid-cols-2 lg:gap-12 lg:p-12"
+          style={{
+            background: "radial-gradient(ellipse 55% 45% at 15% 80%, rgba(113,198,187,0.45) 0%, transparent 60%), radial-gradient(ellipse 70% 60% at 80% 30%, rgba(113,198,187,0.8) 0%, transparent 65%), linear-gradient(135deg, #28595B 0%, color-mix(in srgb, #28595B 70%, #71C6BB) 35%, #71C6BB 65%, #28595B 100%)"
+          }}
+        >
+          <div className="flex h-full min-w-0 flex-col items-start justify-center gap-5 text-left sm:gap-6">
+            <div className="flex items-center gap-4 sm:gap-5">
+              <img src={logoDominusIa} alt="Dominus IA" className="h-12 w-auto max-w-[60%] object-contain sm:h-16" />
+            </div>
+            <h3 className="font-display fluid-h3 font-extrabold leading-snug text-white">Inteligência Artificial na gestão de estoque</h3>
+            <p className="fluid-body font-medium leading-relaxed text-white">
+              A Waybit desenvolveu o Dominus IA para apoiar as tarefas mais críticas do estoque:
+              leitura e entrada automatizada de notas fiscais, conferência de contagens, cálculo
+              do Custo de Mercadorias Vendidas (CMV) e análise preditiva de ruptura.
+            </p>
+            <ul className="grid w-full grid-cols-1 gap-3 sm:grid-cols-2">
+              {["Entrada ágil de NF-e de fornecedores", "Análise de margem e CMV por porção", "Alertas para evitar falta de insumos", "Mais precisão nas compras da semana"].map((benefit) => (
+                <li key={benefit} className="flex items-start gap-2 fluid-secondary font-medium text-white">
+                  <CheckCircle2 size={16} className="mt-0.5 shrink-0 text-[#173C3D]" aria-hidden="true" />
+                  <span>{benefit}</span>
+                </li>
+              ))}
+            </ul>
+            <button type="button" onClick={onOpenSpecialist} className="inline-flex min-h-12 max-w-full items-center rounded-xl bg-[#173C3D] px-6 py-3 text-left font-bold fluid-btn text-white shadow-md transition-all hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#80CCC3] focus-visible:ring-offset-2">Saber mais sobre o Dominus IA</button>
+            <p className="fluid-legal font-medium leading-relaxed text-white">
+              * Módulo avançado sujeito a plano e disponibilidade. Consulte a equipe comercial para saber mais.
+            </p>
+          </div>
+          <div className="flex min-w-0 items-center justify-center">
+            <img src={dominusIaProductImage} alt="Dominus IA em notebook e smartphone" className="block h-auto w-full max-w-full object-contain" loading="lazy" decoding="async" />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 function DominusVarejoPage() {
   const [specialistOpen, setSpecialistOpen] = useState(false);
@@ -286,20 +348,39 @@ function DominusVarejoPage() {
                 comércio.
               </p>
             </div>
-            <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4 xl:grid-cols-5">
-              {segments.map((segment) => (
-                <li
-                  key={segment.name}
-                  className="flex min-h-16 items-center gap-3 rounded-xl border border-border bg-white p-3 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-[#3BBCEC]/40 hover:shadow-md sm:p-4"
-                >
-                  <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-[#3BBCEC]/10 text-[#3BBCEC]">
-                    <segment.icon size={17} aria-hidden="true" />
-                  </span>
-                  <span className="fluid-secondary font-semibold leading-snug text-foreground">
-                    {segment.name}
-                  </span>
-                </li>
-              ))}
+            <ul className="mx-auto flex flex-wrap justify-center gap-3 sm:gap-4">
+              {segments.map((segment) => {
+                const SegmentIcon = segment.icon;
+                const cardContent = (
+                  <>
+                    <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-[#3BBCEC]/10 text-[#3BBCEC]">
+                      <SegmentIcon size={17} aria-hidden="true" />
+                    </span>
+                    <span className="fluid-secondary font-semibold leading-snug text-foreground">
+                      {segment.name}
+                    </span>
+                  </>
+                );
+                const cardClassName =
+                  "flex min-h-16 w-full items-center gap-3 rounded-xl border border-border bg-white p-3 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-[#3BBCEC]/40 hover:shadow-md sm:p-4";
+                const widthClassName =
+                  "w-[calc(50%_-_0.375rem)] sm:w-[calc(33.333%_-_0.667rem)] lg:w-[calc(25%_-_0.75rem)] xl:w-[calc(20%_-_0.8rem)]";
+
+                return (
+                  <li key={segment.name} className={widthClassName}>
+                    {segment.name === "Padarias" ? (
+                      <Link
+                        to={getRetailSegmentRoute("Padaria")}
+                        className={`${cardClassName} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3BBCEC]/60 focus-visible:ring-offset-2`}
+                      >
+                        {cardContent}
+                      </Link>
+                    ) : (
+                      <div className={cardClassName}>{cardContent}</div>
+                    )}
+                  </li>
+                );
+              })}
             </ul>
           </div>
         </section>
@@ -359,7 +440,11 @@ function DominusVarejoPage() {
           </div>
         </section>
 
-        <section id="funcionalidades" className="w-full border-b border-border bg-background">
+        {/* ─── DESTAQUE DOMINUS IA — GESTÃO INTELIGENTE DE ESTOQUE ─── */}
+        <DominusIaSection onOpenSpecialist={() => setSpecialistOpen(true)} />
+
+        {/* ───  FUNCIONALIDADES DOMINUS VAREJO ─── */}
+        <section id="funcionalidades" className="w-full border-t border-b border-border bg-background">
           <div className="landing-page-container">
             <div className="section-intro mx-auto max-w-4xl text-center">
               <div className="section-eyebrow border border-[#3BBCEC]/30 bg-[#3BBCEC]/10 text-[#3BBCEC]">
@@ -429,45 +514,60 @@ function DominusVarejoPage() {
           </div>
         </section>
 
+        {/* ─── SEÇÃO COMERCIAL DE PLANOS E INVESTIMENTOS (Requisito Principal) ─── */}
         <section
-          id="planos-dominus-varejo"
-          className="relative w-full overflow-hidden border-t border-[#3BBCEC]/20 bg-[radial-gradient(ellipse_72%_68%_at_84%_28%,rgba(59,188,236,0.34)_0%,rgba(20,105,154,0.18)_38%,transparent_68%),radial-gradient(ellipse_58%_62%_at_10%_88%,rgba(59,188,236,0.24)_0%,transparent_65%),linear-gradient(135deg,#052b3c_0%,#0d5675_38%,#073d57_68%,#031e2b_100%)]"
+          id="planos-dominus-food"
+          className=" relative w-full overflow-hidden border-t border-[#3BBCEC]/20"
+          style={{
+            background:
+              "radial-gradient(ellipse 72% 68% at 84% 28%, rgba(59,188,236,0.34) 0%, rgba(20,105,154,0.18) 38%, transparent 68%), radial-gradient(ellipse 58% 62% at 10% 88%, rgba(59,188,236,0.24) 0%, transparent 65%), linear-gradient(135deg, #052b3c 0%, #0d5675 38%, #073d57 68%, #031e2b 100%)",
+          }}
         >
+          {/* Fundo luminoso */}
           <div className="landing-page-container relative z-10">
             <div className="section-intro mx-auto max-w-7xl text-center">
-              <div className="section-eyebrow inline-flex items-center gap-2 rounded-full border border-[#3BBCEC]/40 bg-[#3BBCEC]/15 px-4 py-1.5 text-[#3BBCEC]">
-                Planos Dominus Varejo
+              <div className="section-eyebrow inline-flex items-center gap-2 rounded-full border border-[#3BBCEC]/40 bg-[#3BBCEC]/15 px-4 py-1.5 mb-5 sm:mb-6">
+                <Star size={13} className="text-[#3BBCEC]" aria-hidden="true" />
+                <span className="fluid-caption font-bold uppercase tracking-wider text-[#3BBCEC]">
+                  Investimento Transparente
+                </span>
               </div>
-              <h2 className="font-display fluid-h2 font-extrabold leading-tight tracking-tight text-white">
+
+              {/* Título e Subtítulo Sugeridos na Documentação */}
+              <h2 className="font-display fluid-h2 font-extrabold tracking-tight text-white leading-tight">
                 Conheça os planos do Dominus Varejo
               </h2>
-              <p className="mx-auto mt-4 max-w-4xl fluid-body leading-relaxed text-white/80">
-                As opções são organizadas por faturamento mensal e quantidade de PDVs.
+              <p className="mt-4 fluid-body text-white/80 leading-relaxed max-w-4xl mx-auto">
+                Encontre uma opção para a realidade da sua empresa e descubra como começar a organizar
+                sua gestão com o Dominus Varejo.
               </p>
 
-              <div
-                role="group"
-                aria-label="Selecione a periodicidade dos planos"
-                className="mt-8 inline-flex items-center rounded-xl border border-white/20 bg-black/40 p-1 backdrop-blur-md"
-              >
-                {(["anual", "mensal"] as const).map((cycle) => (
-                  <button
-                    key={cycle}
-                    type="button"
-                    aria-pressed={billingCycle === cycle}
-                    onClick={() => setBillingCycle(cycle)}
-                    className={`rounded-lg px-4 py-1.5 text-xs font-semibold transition-all sm:text-sm ${
-                      billingCycle === cycle
-                        ? "bg-[#3BBCEC] font-bold text-white shadow-md"
-                        : "text-white/70 hover:text-white"
+              {/* Seletor de Periodicidade: Mensal / Anual */}
+              <div className="mt-8 inline-flex items-center rounded-xl border border-white/20 bg-black/40 p-1 backdrop-blur-md">
+                <button
+                  type="button"
+                  onClick={() => setBillingCycle("anual")}
+                  className={`rounded-lg px-4 py-1.5 text-xs sm:text-sm font-semibold transition-all ${billingCycle === "anual"
+                    ? "bg-[#3BBCEC] text-white shadow-md font-bold"
+                    : "text-white/70 hover:text-white"
                     }`}
-                  >
-                    {cycle === "anual" ? "Anual" : "Mensal"}
-                  </button>
-                ))}
+                >
+                  Anual (Desconto especial)
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setBillingCycle("mensal")}
+                  className={`rounded-lg px-4 py-1.5 text-xs sm:text-sm font-semibold transition-all ${billingCycle === "mensal"
+                    ? "bg-[#3BBCEC] text-white shadow-md font-bold"
+                    : "text-white/70 hover:text-white"
+                    }`}
+                >
+                  Mensal
+                </button>
               </div>
             </div>
 
+            {/* Grid com os 4 Planos Oficiais do Food */}
             <div
               role="region"
               aria-label="Planos do Dominus Varejo"
@@ -475,61 +575,82 @@ function DominusVarejoPage() {
               className="w-full snap-x snap-mandatory overflow-x-auto overscroll-x-contain pb-4 [scrollbar-color:rgba(59,188,236,0.35)_rgba(59,188,236,0.06)] [scrollbar-width:thin] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3BBCEC]/60 focus-visible:ring-offset-2 lg:overflow-visible lg:pb-0 lg:ring-0"
               style={{ scrollbarWidth: "thin" }}
             >
-              <div className="flex w-max gap-5 pr-5 sm:gap-6 sm:pr-6 lg:grid lg:w-full lg:grid-cols-4 lg:pr-0">
-                {varejoPlans.map((plan) => {
-                  const price = billingCycle === "anual" ? plan.annual : plan.monthly;
+              <div className="flex w-max gap-5 pr-5 sm:gap-6 sm:pr-6 lg:w-full lg:pr-0 lg:grid lg:grid-cols-4">
+                {planosVarejo.map((plano) => {
+                  const preco = billingCycle === "anual" ? plano.anual : plano.mensal;
                   return (
-                    <article
-                      key={plan.id}
-                      className="group relative flex w-[min(20rem,calc(100vw-3rem))] shrink-0 snap-start flex-col justify-between rounded-2xl border border-white/15 bg-black/40 p-6 backdrop-blur-md transition-all duration-300 hover:scale-[1.02] hover:border-[#3BBCEC] hover:bg-[#073d57]/90 hover:shadow-2xl hover:ring-2 hover:ring-[#3BBCEC]/50 lg:w-auto"
+                    <div
+                      key={plano.id}
+                      className="group isolate relative flex w-[min(20rem,calc(100vw-3rem))] shrink-0 snap-start flex-col justify-between rounded-2xl border border-white/15 bg-black/40 p-6 backdrop-blur-md transition-all duration-300 hover:scale-[1.02] hover:border-[#3BBCEC] hover:bg-[#073d57]/90 hover:shadow-2xl hover:ring-2 hover:ring-[#3BBCEC]/50 lg:w-auto"
                     >
+
                       <div>
-                        <div className="mb-3 flex items-center justify-between gap-2">
-                          <h3 className="font-display text-lg font-extrabold text-white">
-                            {plan.name}
+                        <div className="flex items-center justify-between mb-3">
+                          <h3 className="font-display font-extrabold text-lg text-white">
+                            {plano.nome}
                           </h3>
-                          {billingCycle === "anual" && (
-                            <span className="rounded-md border border-[#3BBCEC] px-2 py-0.5 text-[11px] font-bold text-[#3BBCEC]">
-                              até 12x no cartão
-                            </span>
+                        </div>
+
+                        <p className="text-xs text-white/60 min-h-[32px] leading-snug mb-4">
+                          {plano.descricao}
+                        </p>
+
+                        {/* Bloco de Preço */}
+                        <div className="py-4 border-y border-white/10 mb-4">
+                          {billingCycle === "anual" && plano.anualOriginal && (
+                            <div className="origin-left text-base font-semibold text-white/70 line-through mb-1 transition-all duration-300 group-hover:scale-[1.03] group-hover:font-bold group-hover:text-[#FFFFFF]">
+                              R$ {plano.anualOriginal}
+                            </div>
                           )}
-                        </div>
-                        <div className="mb-4 min-h-8 text-xs leading-snug text-white/60">
-                          {plan.revenue}
-                        </div>
-                        <div className="mb-4 border-y border-white/10 py-4">
                           <div className="flex items-baseline gap-1 text-white">
-                            <span className="text-xs font-semibold text-white/70">R$</span>
-                            <span className="font-display text-3xl font-extrabold tracking-tight">
-                              {price}
-                            </span>
-                            <span className="text-xs font-medium text-white/60">/mês</span>
+                            {preco !== "Consulte" ? (
+                              <>
+                                {billingCycle === "anual" && (
+                                  <span className="font-display text-lg font-extrabold">12X</span>
+                                )}
+                                <span className="text-xs font-semibold text-white/70">R$</span>
+                                <span className="font-display text-3xl font-extrabold tracking-tight">
+                                  {preco}
+                                </span>
+                                <span className="text-xs text-white/60 font-medium">/mês</span>
+                              </>
+                            ) : (
+                              <span className="font-display text-2xl font-extrabold text-white">
+                                Sob Consulta
+                              </span>
+                            )}
                           </div>
                         </div>
-                        <ul className="mb-6 flex flex-col gap-2 text-xs text-white/80">
-                          <li className="flex items-start gap-2">
-                            <CheckCircle2
-                              size={13}
-                              className="mt-0.5 shrink-0 text-[#3BBCEC]"
-                              aria-hidden="true"
-                            />
-                            <span>{plan.terminals}</span>
-                          </li>
+
+                        {/* Lista de Recursos */}
+                        <ul className="flex flex-col gap-2 mb-6 text-sm text-white/80">
+                          {[plano.faturamento, plano.pdvs].map((item) => (
+                            <li key={item} className="flex items-start gap-2">
+                              <CheckCircle2
+                                size={13}
+                                className="mt-0.5 shrink-0 text-[#3BBCEC]"
+                                aria-hidden="true"
+                              />
+                              <span>{item}</span>
+                            </li>
+                          ))}
                         </ul>
                       </div>
-                      <button
-                        type="button"
-                        onClick={() => setSpecialistOpen(true)}
-                        className="inline-flex min-h-10 w-full items-center justify-center gap-1.5 rounded-xl border border-white/25 bg-white/10 text-xs font-bold text-white transition-all duration-200 hover:border-transparent hover:bg-[#3BBCEC] hover:shadow-md"
+
+                      <Link
+                        to="/planos"
+                        search={{ segmento: "varejo" }}
+                        className="inline-flex min-h-10 w-full items-center justify-center gap-1.5 rounded-xl border border-white/25 bg-white/10 text-xs font-bold text-white transition-all duration-200 hover:bg-[#3BBCEC] group-hover:border-transparent group-hover:bg-[#3BBCEC] group-hover:shadow-md group-hover:hover:bg-[#3BBCEC] group-hover:hover:brightness-110"
                       >
-                        Falar sobre este plano
-                        <ArrowRight size={13} aria-hidden="true" />
-                      </button>
-                    </article>
+                        <span>Ver detalhes deste plano</span>
+                        <ArrowRight size={13} />
+                      </Link>
+                    </div>
                   );
                 })}
               </div>
             </div>
+
           </div>
         </section>
 
@@ -607,7 +728,7 @@ function DominusVarejoPage() {
           </div>
         </section>
 
-        <section id="duvidas" className="w-full border-b border-border bg-surface-subtle/50">
+        <section id="duvidas" className="w-full border-t border-b border-border bg-surface-subtle/50">
           <div className="landing-page-container">
             <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-14">
               <div className="section-intro text-center lg:text-left">

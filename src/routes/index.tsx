@@ -1867,10 +1867,12 @@ function SolutionCard({
     );
   }
 
-  if (item.id === "varejo") {
+  if (item.id === "varejo" || item.id === "food") {
+    const route = item.id === "varejo" ? "/dominus-varejo" : "/dominus-food";
+
     return (
       <Link
-        to="/dominus-varejo"
+        to={route}
         aria-label={`${item.title} - ${item.description}`}
         className="flex h-full w-full cursor-pointer flex-col rounded-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
       >

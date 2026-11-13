@@ -229,7 +229,7 @@ const planosFood = [
     anualOriginal: "3.388,00",
     faturamento: "Faturamento até 60 mil/mês",
     pdvs: "2 PDVs",
-    descricao: "Ideal para botecos e petiscarias em fase de estruturação e saída do papel.",
+    descricao: "Ideal para botecos em fase de estruturação e saindo do papel.",
     destaques: [
       "Gestão de Vendas e Mesas",
       "Gestão de Estoque Completo",
@@ -248,7 +248,7 @@ const planosFood = [
     anualOriginal: "3.588,00",
     faturamento: "Faturamento de 60 a 120 mil/mês",
     pdvs: "PDVs Ilimitados",
-    descricao: "O plano mais equilibrado para botecos movimentados com salão e balcão cheios.",
+    descricao: "O plano pensado para botecos com salão e balcão movimentados.",
     destaques: [
       "Tudo do FIT FOOD",
       "PDVs e Caixas Ilimitados",
@@ -267,7 +267,7 @@ const planosFood = [
     anualOriginal: "5.388,00",
     faturamento: "Faturamento de 120 a 200 mil/mês",
     pdvs: "PDVs Ilimitados",
-    descricao: "Gestão robusta para estabelecimentos com alto giro, cozinha rápida e delivery.",
+    descricao: "Gestão robusta para botecos com alto giro e delivery.",
     destaques: [
       "Tudo do BASIC FOOD",
       "Integração Completa Salão-Cozinha (KDS)",
@@ -285,7 +285,7 @@ const planosFood = [
     anual: "Consulte",
     faturamento: "Faturamento acima de 200 mil/mês",
     pdvs: "PDVs Ilimitados",
-    descricao: "Solução sob medida para grandes bares, franquias ou redes de alimentação.",
+    descricao: "Solução sob medida para grandes bares ou franquias.",
     destaques: [
       "Tudo do FULL FOOD",
       "Acompanhamento Executivo Exclusivo",
@@ -1485,11 +1485,6 @@ function DominusFoodPage() {
                           <h3 className="font-display font-extrabold text-lg text-white">
                             {plano.nome}
                           </h3>
-                          {billingCycle === "anual" && (
-                            <span className="rounded-md border border-[#FC4242] bg-transparent px-2 py-0.5 text-[11px] font-bold text-[#FC4242] transition-colors duration-300 group-hover:border-[#FC4242] group-hover:bg-[#FC4242] group-hover:text-white">
-                              até 12x
-                            </span>
-                          )}
                         </div>
 
                         <p className="text-xs text-white/60 min-h-[32px] leading-snug mb-4">
@@ -1499,7 +1494,7 @@ function DominusFoodPage() {
                         {/* Bloco de Preço */}
                         <div className="py-4 border-y border-white/10 mb-4">
                           {billingCycle === "anual" && plano.anualOriginal && (
-                            <div className="text-xs font-semibold text-white/70 line-through mb-1">
+                            <div className="origin-left text-base font-semibold text-white/70 line-through mb-1 transition-all duration-300 group-hover:scale-[1.03] group-hover:font-bold group-hover:text-[#FFFFFF]">
                               R$ {plano.anualOriginal}
                             </div>
                           )}
@@ -1531,7 +1526,7 @@ function DominusFoodPage() {
                         </div>
 
                         {/* Lista de Recursos */}
-                        <ul className="flex flex-col gap-2 mb-6 text-xs text-white/80">
+                        <ul className="flex flex-col gap-2 mb-6 text-sm text-white/80">
                           {[plano.faturamento, plano.pdvs].map((item) => (
                             <li key={item} className="flex items-start gap-2">
                               <CheckCircle2
