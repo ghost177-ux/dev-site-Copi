@@ -31,6 +31,8 @@ waybit/
 │   ├── assets/
 │   ├── components/
 │   │   ├── home/
+│   │   ├── sections/
+│   │   ├── segment/
 │   │   └── ui/
 │   │
 │   ├── data/
@@ -354,6 +356,102 @@ ________________________________________________________________________________
 * Dados separados da interface.
 * Documentação do projeto.
 * Arquivos de recursos visuais que devem ficar em `src/assets/`.
+
+______________________________________________________________________________________________________________________________
+
+**Nome da pasta/arquivo:** `src/components/home/`
+
+**Finalidade:**
+* Armazenar componentes visuais utilizados na construção da página inicial (Home), incluindo seções, elementos reutilizáveis e componentes específicos de suas funcionalidades.
+
+**O que deve conter:**
+* Cabeçalho e rodapé específicos da Home, caso existam.
+* Seções da página inicial.
+* Cards e elementos visuais.
+* Formulários e botões específicos da Home.
+* Componentes reutilizáveis dentro da própria Home.
+
+**O que não deve conter:**
+* Páginas completas pertencentes ao sistema de rotas.
+* Dados separados da interface.
+* Documentação do projeto.
+* Arquivos de recursos visuais que devem ficar em `src/assets/`.
+* Componentes compartilhados globalmente que devem ficar em `src/components/`.
+
+______________________________________________________________________________________________________________________________
+
+**Nome da pasta/arquivo:** `src/components/sections/`
+
+**Finalidade:**
+* Armazenar componentes que representam seções completas da interface e que podem ser reutilizados em diferentes páginas da aplicação.
+
+**O que deve conter:**
+* Seções de apresentação e introdução.
+* Seções de benefícios e funcionalidades.
+* Seções de estatísticas.
+* Seções de depoimentos.
+* Seções de planos e preços.
+* Seções de chamadas para ação (CTA).
+* Seções de perguntas frequentes (FAQ).
+* Outras estruturas visuais reutilizáveis entre páginas.
+
+**O que não deve conter:**
+* Páginas completas pertencentes ao sistema de rotas.
+* Componentes exclusivos da Home (devem ficar em `home/`).
+* Cabeçalhos, rodapés e menus globais (devem ficar em `components/`).
+* Dados separados da interface.
+* Documentação do projeto.
+* Arquivos de recursos visuais que devem ficar em `src/assets/.`
+
+______________________________________________________________________________________________________________________________
+
+**Nome da pasta/arquivo:** `src/components/segment/`
+
+**Finalidade:**
+* Armazenar componentes visuais específicos dos segmentos de atuação da aplicação, agrupando elementos, seções e funcionalidades desenvolvidos para atender às particularidades de cada segmento.
+
+**O que deve conter:**
+* Componentes específicos do segmento Food.
+* Componentes específicos do segmento Varejo.
+* Componentes específicos do segmento Autocenter.
+* Seções e elementos visuais exclusivos de cada segmento.
+* Cards, formulários e elementos de apresentação específicos.
+* Componentes reutilizáveis dentro de cada segmento.
+
+**O que não deve conter:**
+* Páginas completas pertencentes ao sistema de rotas.
+* Componentes globais ou compartilhados entre segmentos (devem ficar em `components/` ou `sections/`).
+* Dados separados da interface.
+* Documentação do projeto.
+* Arquivos de recursos visuais que devem ficar em `src/assets/`.
+
+______________________________________________________________________________________________________________________________
+
+**Nome da pasta/arquivo:** `src/components/ui/`
+
+**Finalidade:**
+* Armazenar componentes fundamentais e reutilizáveis da interface visual, utilizados na construção de diferentes páginas e funcionalidades da aplicação, mantendo consistência visual e evitando duplicação de código.
+
+**O que deve conter:**
+* Botões e variações de botões.
+* Inputs e campos de formulário.
+* Selects e caixas de seleção.
+* Modais e caixas de diálogo.
+* Tooltips e elementos de ajuda.
+* Badges e indicadores visuais.
+* Cards genéricos.
+* Abas, acordeões e componentes de interação.
+* Elementos básicos de navegação.
+* Outros componentes visuais reutilizáveis.
+
+**O que não deve conter:**
+* Páginas completas pertencentes ao sistema de rotas.
+* Seções completas de páginas.
+* Componentes exclusivos da Home.
+* Componentes específicos dos segmentos Food, Varejo e Autocenter.
+* Dados separados da interface.
+* Documentação do projeto.
+* Arquivos de recursos visuais que devem ficar em src/assets/
 
 ______________________________________________________________________________________________________________________________
 
