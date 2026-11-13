@@ -341,7 +341,15 @@ function formatPrice(price: string) {
   return { whole, cents };
 }
 
-function PlanPrice({ price, originalPrice }: { price: string; originalPrice?: string | undefined }) {
+function PlanPrice({
+  price,
+  originalPrice,
+  showInstallments,
+}: {
+  price: string;
+  originalPrice?: string | undefined;
+  showInstallments?: boolean | undefined;
+}) {
   const amount = formatPrice(price);
 
   return (
@@ -358,6 +366,9 @@ function PlanPrice({ price, originalPrice }: { price: string; originalPrice?: st
       </span>
       {amount ? (
         <span className="flex items-baseline gap-[clamp(2px,0.35vw,6px)] whitespace-nowrap">
+          {showInstallments ? (
+            <span className="font-display text-[clamp(0.95rem,1.4vw,1.15rem)] font-bold">12X</span>
+          ) : null}
           <span className="text-[clamp(0.95rem,1.4vw,1.15rem)] font-semibold">R$</span>
           <span className="font-display text-[clamp(2.6rem,4.1vw,3.6rem)] font-bold leading-[0.9] tracking-tight">
             {amount.whole}
@@ -402,7 +413,11 @@ function PlanCard({
           <h3 className="font-display text-[clamp(1.125rem,2.1vw,1.75rem)] font-bold uppercase leading-tight">
             {plan.name}
           </h3>
-          <PlanPrice price={price} originalPrice={originalPrice} />
+          <PlanPrice
+            price={price}
+            originalPrice={originalPrice}
+            showInstallments={billingCycle === "anual"}
+          />
         </div>
 
         {billingCycle === "anual" && (
