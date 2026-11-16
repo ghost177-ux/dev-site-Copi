@@ -1,4 +1,4 @@
-﻿import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 import {
   ArrowRight,
@@ -40,6 +40,7 @@ import {
   Boxes,
 } from "lucide-react";
 import { DominusFoodHeader } from "@/components/DominusFoodHeader";
+import { DominusIaFormModal } from "@/components/DominusIaFormModal";
 import { GettingStartedSection } from "@/components/segment/GettingStartedSection";
 import { SegmentProofPoints } from "@/components/segment/SegmentProofPoints";
 import { SegmentPlanPrompt } from "@/components/segment/SegmentPlanPrompt";
@@ -55,7 +56,7 @@ import {
 } from "@/components/ui/carousel";
 
 import foodLogo from "@/assets/food-logo.png";
-import dominusIaLogo from "@/assets/Dominus IA.png";
+import dominusIaLogo from "@/assets/logo Dominus-IA.avif";
 import dominusIaProductImage from "@/assets/Dominus IA.avif";
 import dominusFoodEcosystemImage from "@/assets/Dominus-Food-1.avif";
 import dominusFoodFeaturesImage from "@/assets/Funcionalidade Food.avif";
@@ -280,8 +281,8 @@ function FaqAccordionItem({
   );
 }
 
-function DominusIaSection({ onOpenSpecialist }: {
-  onOpenSpecialist: () => void;
+function DominusIaSection({ onOpenDominusIa }: {
+  onOpenDominusIa: () => void;
 }) {
   return (
     <section
@@ -297,8 +298,7 @@ function DominusIaSection({ onOpenSpecialist }: {
         >
           <div className="flex h-full min-w-0 flex-col items-start justify-center gap-5 text-left sm:gap-6">
             <div className="flex items-center gap-4 sm:gap-5">
-              <img src={dominusIaLogo} alt="Dominus IA" className="h-12 w-auto max-w-[40%] object-contain sm:h-16" />
-              <h2 className="font-display fluid-h2 font-extrabold tracking-tight text-white">Dominus IA</h2>
+              <img src={dominusIaLogo} alt="Dominus IA" className="h-12 w-auto max-w-[60%] object-contain sm:h-16" />
             </div>
             <h3 className="font-display fluid-h3 font-extrabold leading-snug text-white">Inteligência Artificial na gestão de estoque</h3>
             <p className="fluid-body font-medium leading-relaxed text-white">
@@ -314,7 +314,7 @@ function DominusIaSection({ onOpenSpecialist }: {
                 </li>
               ))}
             </ul>
-            <button type="button" onClick={onOpenSpecialist} className="inline-flex min-h-12 max-w-full items-center rounded-xl bg-[#173C3D] px-6 py-3 text-left font-bold fluid-btn text-white shadow-md transition-all hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#80CCC3] focus-visible:ring-offset-2">Saber mais sobre o Dominus IA</button>
+            <button type="button" onClick={onOpenDominusIa} className="inline-flex min-h-12 max-w-full items-center rounded-xl bg-[#173C3D] px-6 py-3 text-left font-bold fluid-btn text-white shadow-md transition-all hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#80CCC3] focus-visible:ring-offset-2">Saber mais sobre o Dominus IA</button>
             <p className="fluid-legal font-medium leading-relaxed text-white">
               * Módulo avançado sujeito a plano e disponibilidade. Consulte a equipe comercial para saber mais.
             </p>
@@ -331,11 +331,12 @@ function DominusIaSection({ onOpenSpecialist }: {
 function DominusFoodPage() {
   const [specialistOpen, setSpecialistOpen] = useState(false);
   const [bookingOpen, setBookingOpen] = useState(false);
+  const [dominusIaModalOpen, setDominusIaModalOpen] = useState(false);
   const [activeFaqIndex, setActiveFaqIndex] = useState(0);
   const [activeFoodVideo, setActiveFoodVideo] = useState<(typeof foodVideoCases)[number] | null>(null);
   const [billingCycle, setBillingCycle] = useState<"anual" | "mensal">("anual");
-  
-  
+
+
   const [isIntroVideoOpen, setIsIntroVideoOpen] = useState(false);
 
   // Carrega o script de incorporação do Full Funnel de forma controlada sem duplicação
@@ -718,7 +719,7 @@ function DominusFoodPage() {
         </section>
 
         {/* ─── 5. DESTAQUE DOMINUS IA — GESTÃO INTELIGENTE DE ESTOQUE ─── */}
-        <DominusIaSection onOpenSpecialist={() => setSpecialistOpen(true)} />
+        <DominusIaSection onOpenDominusIa={() => setDominusIaModalOpen(true)} />
 
         {/* ─── 7. PROVA SOCIAL, INDICADORES & CLIENTES REAIS ─── */}
         <section id="prova-social-dominus-food" className="order-2 w-full border-t border-border bg-background py-12 sm:py-16 lg:py-24">
@@ -1071,7 +1072,7 @@ function DominusFoodPage() {
         )}
 
         {/* ─── 8. SEÇÃO COMERCIAL DE PLANOS E INVESTIMENTOS (Requisito Principal) ─── */}
-                {activeFoodVideo && (
+        {activeFoodVideo && (
           <div
             role="dialog"
             aria-modal="true"
@@ -1393,6 +1394,12 @@ function DominusFoodPage() {
       <FullFunnelBookingModal
         open={bookingOpen}
         onOpenChange={setBookingOpen}
+      />
+
+      {/* Modal Full Funnel de Contato Dominus IA */}
+      <DominusIaFormModal
+        open={dominusIaModalOpen}
+        onOpenChange={setDominusIaModalOpen}
       />
     </div>
   );

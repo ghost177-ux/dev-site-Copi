@@ -34,6 +34,7 @@ import {
 import { useState } from "react";
 
 import { DominusVarejoHeader } from "@/components/DominusVarejoHeader";
+import { DominusIaFormModal } from "@/components/DominusIaFormModal";
 import { FullFunnelBookingModal } from "@/components/FullFunnelBookingModal";
 import { SpecialistDialog } from "@/components/SpecialistDialog";
 import { getRetailSegmentRoute } from "@/data/segmentMenuRoutes";
@@ -227,8 +228,8 @@ const faqs = [
 ];
 
 
-function DominusIaSection({ onOpenSpecialist }: {
-  onOpenSpecialist: () => void;
+function DominusIaSection({ onOpenDominusIa }: {
+  onOpenDominusIa: () => void;
 }) {
   return (
     <section
@@ -260,7 +261,7 @@ function DominusIaSection({ onOpenSpecialist }: {
                 </li>
               ))}
             </ul>
-            <button type="button" onClick={onOpenSpecialist} className="inline-flex min-h-12 max-w-full items-center rounded-xl bg-[#173C3D] px-6 py-3 text-left font-bold fluid-btn text-white shadow-md transition-all hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#80CCC3] focus-visible:ring-offset-2">Saber mais sobre o Dominus IA</button>
+            <button type="button" onClick={onOpenDominusIa} className="inline-flex min-h-12 max-w-full items-center rounded-xl bg-[#173C3D] px-6 py-3 text-left font-bold fluid-btn text-white shadow-md transition-all hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#80CCC3] focus-visible:ring-offset-2">Saber mais sobre o Dominus IA</button>
             <p className="fluid-legal font-medium leading-relaxed text-white">
               * Módulo avançado sujeito a plano e disponibilidade. Consulte a equipe comercial para saber mais.
             </p>
@@ -279,6 +280,7 @@ function DominusVarejoPage() {
   const [activeFaqIndex, setActiveFaqIndex] = useState(0);
   const [billingCycle, setBillingCycle] = useState<"anual" | "mensal">("anual");
   const [bookingOpen, setBookingOpen] = useState(false);
+  const [dominusIaModalOpen, setDominusIaModalOpen] = useState(false);
 
   return (
     <div className="dominus-varejo-page flex min-h-screen w-full flex-col overflow-x-hidden bg-background text-foreground">
@@ -441,7 +443,7 @@ function DominusVarejoPage() {
         </section>
 
         {/* ─── DESTAQUE DOMINUS IA — GESTÃO INTELIGENTE DE ESTOQUE ─── */}
-        <DominusIaSection onOpenSpecialist={() => setSpecialistOpen(true)} />
+        <DominusIaSection onOpenDominusIa={() => setDominusIaModalOpen(true)} />
 
         {/* ───  FUNCIONALIDADES DOMINUS VAREJO ─── */}
         <section id="funcionalidades" className="w-full border-t border-b border-border bg-background">
@@ -816,6 +818,10 @@ function DominusVarejoPage() {
         open={bookingOpen}
         onOpenChange={setBookingOpen}
         segmentName="Varejo"
+      />
+      <DominusIaFormModal
+        open={dominusIaModalOpen}
+        onOpenChange={setDominusIaModalOpen}
       />
     </div>
   );

@@ -34,6 +34,7 @@ import {
 import { useState } from "react";
 
 import { DominusFoodHeader } from "@/components/DominusFoodHeader";
+import { DominusIaFormModal } from "@/components/DominusIaFormModal";
 import { FullFunnelBookingModal } from "@/components/FullFunnelBookingModal";
 import { SpecialistDialog } from "@/components/SpecialistDialog";
 import foodHeroImage from "@/assets/Dominus-Food-1.avif";
@@ -113,8 +114,8 @@ const faqs = [
   { question: "O Dominus Food se integra ao delivery?", answer: "Sim. O Dominus Food possui integração com o iFood e conta com o Bitfood, plataforma própria de delivery. Consulte a equipe sobre as condições e a disponibilidade para sua operação." },
 ];
 
-function DominusIaSection({ onOpenSpecialist }: {
-  onOpenSpecialist: () => void;
+function DominusIaSection({ onOpenDominusIa }: {
+  onOpenDominusIa: () => void;
 }) {
   return (
     <section
@@ -146,7 +147,7 @@ function DominusIaSection({ onOpenSpecialist }: {
                 </li>
               ))}
             </ul>
-            <button type="button" onClick={onOpenSpecialist} className="inline-flex min-h-12 max-w-full items-center rounded-xl bg-[#173C3D] px-6 py-3 text-left font-bold fluid-btn text-white shadow-md transition-all hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#80CCC3] focus-visible:ring-offset-2">Saber mais sobre o Dominus IA</button>
+            <button type="button" onClick={onOpenDominusIa} className="inline-flex min-h-12 max-w-full items-center rounded-xl bg-[#173C3D] px-6 py-3 text-left font-bold fluid-btn text-white shadow-md transition-all hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#80CCC3] focus-visible:ring-offset-2">Saber mais sobre o Dominus IA</button>
             <p className="fluid-legal font-medium leading-relaxed text-white">
               * Módulo avançado sujeito a plano e disponibilidade. Consulte a equipe comercial para saber mais.
             </p>
@@ -165,6 +166,7 @@ function DominusFoodOverviewPage() {
   const [activeFaqIndex, setActiveFaqIndex] = useState(0);
   const [billingCycle, setBillingCycle] = useState<"anual" | "mensal">("anual");
   const [bookingOpen, setBookingOpen] = useState(false);
+  const [dominusIaModalOpen, setDominusIaModalOpen] = useState(false);
 
   return (
     <div className="dominus-food-page dominus-food-overview flex min-h-screen w-full flex-col overflow-x-hidden bg-background text-foreground">
@@ -335,7 +337,7 @@ function DominusFoodOverviewPage() {
         </section>
 
         {/* ─── DESTAQUE DOMINUS IA — GESTÃO INTELIGENTE DE ESTOQUE ─── */}
-        <DominusIaSection onOpenSpecialist={() => setSpecialistOpen(true)} />
+        <DominusIaSection onOpenDominusIa={() => setDominusIaModalOpen(true)} />
 
         {/* ───  FUNCIONALIDADES DOMINUS FOOD ─── */}
         <section id="funcionalidades" className="w-full border-t border-border border-b border-border bg-background">
@@ -614,7 +616,7 @@ function DominusFoodOverviewPage() {
 
         <section id="duvidas" className="w-full border-t border-border border-b border-border bg-surface-subtle/50">
           <div className="landing-page-container">
-            <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-14">
+            <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-16">
               <div className="section-intro text-center lg:text-left">
                 <div className="section-eyebrow border border-segment-food/30 bg-segment-food/10 text-segment-food">
                   Dúvidas frequentes
@@ -626,7 +628,7 @@ function DominusFoodOverviewPage() {
                   Atendimento, estoque, cozinha, delivery e resultados do seu estabelecimento.
                 </p>
               </div>
-              <div className="flex flex-col gap-3">
+              <div className="flex max-w-3xl flex-col gap-4">
                 {faqs.map((faq, index) => {
                   const isOpen = activeFaqIndex === index;
                   const panelId = `food-faq-panel-${index}`;
@@ -634,40 +636,47 @@ function DominusFoodOverviewPage() {
                   return (
                     <article
                       key={faq.question}
-                      className="rounded-2xl border border-border border-l-4 border-l-segment-food bg-card px-4 shadow-sm sm:px-5"
+                      className="rounded-2xl border-0 border-b border-l-6 border-b-[#FC4242] border-l-[#FC4242] bg-[#f7f7f7] px-5 shadow-sm transition-colors sm:px-6"
                     >
                       <h3>
-                        <Button variant="ghost"
+                        <button
                           id={buttonId}
                           type="button"
                           aria-controls={panelId}
                           aria-expanded={isOpen}
-                          onClick={() => setActiveFaqIndex(isOpen ? -1 : index)}
-                          className="flex w-full items-center justify-between gap-4 py-5 text-left font-display fluid-body font-bold leading-snug text-foreground transition-colors hover:text-segment-food focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-segment-food/60"
+                          onClick={() => setActiveFaqIndex(index)}
+                          className="group flex w-full items-center justify-between gap-4 py-5 text-left font-semibold text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FC4242]/60 focus-visible:ring-offset-2"
                         >
-                          {faq.question}
-                          <ChevronDown
-                            size={18}
-                            className={`shrink-0 text-segment-food transition-transform duration-300 ${
+                          <span
+                            className={`fluid-body leading-snug ${
+                              isOpen ? "font-bold" : "font-normal group-hover:font-bold"
+                            } text-foreground`}
+                          >
+                            {faq.question}
+                          </span>
+                          <div
+                            className={`flex shrink-0 items-center justify-center text-[#FC4242] transition-transform duration-300 ${
                               isOpen ? "rotate-180" : ""
                             }`}
                             aria-hidden="true"
-                          />
-                        </Button>
+                          >
+                            <ChevronDown size={16} />
+                          </div>
+                        </button>
                       </h3>
                       {isOpen && (
                         <div
                           id={panelId}
                           role="region"
                           aria-labelledby={buttonId}
-                          className="flex gap-2 pb-5 fluid-secondary leading-relaxed text-muted-foreground"
+                          className="flex gap-2 pb-5 pr-4 fluid-body text-muted-foreground leading-relaxed animate-in fade-in-50 duration-200"
                         >
                           <ArrowRight
-                            size={15}
-                            className="mt-1 shrink-0 text-segment-food"
+                            size={14}
+                            className="mt-1 shrink-0 text-[#FC4242]"
                             aria-hidden="true"
                           />
-                          <p>{faq.answer}</p>
+                          <span>{faq.answer}</span>
                         </div>
                       )}
                     </article>
@@ -700,6 +709,10 @@ function DominusFoodOverviewPage() {
         open={bookingOpen}
         onOpenChange={setBookingOpen}
         segmentName="Food"
+      />
+      <DominusIaFormModal
+        open={dominusIaModalOpen}
+        onOpenChange={setDominusIaModalOpen}
       />
     </div>
   );

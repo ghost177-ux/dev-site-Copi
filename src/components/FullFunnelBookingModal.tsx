@@ -56,13 +56,13 @@ export function FullFunnelBookingModal({
           </DialogPrimitive.Close>
 
           {/* Contêiner interno rolável verticalmente permitindo percorrer todo o calendário */}
-          <div className="relative w-full h-full flex-1 overflow-y-auto overscroll-contain bg-white rounded-[8px]">
+          <div className="relative w-full flex-1 min-h-0 overflow-hidden bg-white rounded-[8px]">
             <iframe
-              src="https://links.fullfunnel.app/widget/booking/LE6EdU7qlKZEKo7LPCT1"
+              src="https://links.fullfunnel.app/widget/otl/dCOwII0XY?slug=gabriel-soares-personal-calendar-y9vpysah4"
               id="fullfunnel-booking-iframe"
               title={`Calendário de Agendamento — Dominus ${segmentName}`}
-              className="w-full border-0 block"
-              style={{ width: "100%", minHeight: "750px" }}
+              className="w-full h-full min-h-0 border-0 block"
+              style={{ width: "100%", height: "100%" }}
               scrolling="auto"
               allow="camera; microphone; autoplay; encrypted-media; fullscreen"
             />
