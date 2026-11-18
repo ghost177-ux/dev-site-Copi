@@ -708,9 +708,9 @@ function DominusFoodPage() {
           className="relative w-full pt-12 pb-14 sm:pt-16 sm:pb-20 lg:pt-20 lg:pb-28"
         >
           <div className="landing-page-container relative z-10">
-            <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-12 lg:gap-8">
+            <div className="grid grid-cols-1 items-start gap-10 min-[771px]:grid-cols-[clamp(45%,calc(45%+((100vw-771px)*5/253)),50%)_1fr] min-[771px]:gap-6 lg:grid-cols-12 lg:gap-8">
               {/* Lado Esquerdo: Mensagem e Ação */}
-              <div className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left">
+              <div className="w-full min-[771px]:min-w-0 lg:col-span-7 flex flex-col items-center min-[771px]:items-start text-center min-[771px]:text-left">
                 {/* Badge de posicionamento */}
                 <div className="inline-flex items-center gap-2 rounded-full border border-[#FC4242]/40 bg-[#FC4242]/10 px-4 py-1.5 mb-5 sm:mb-6">
                   <Wine size={14} className="text-[#FC4242]" aria-hidden="true" />
@@ -732,7 +732,7 @@ function DominusFoodPage() {
               </div>
 
               {/* Lado Direito: Formulário Oficial Full Funnel Dominus Food */}
-              <div className="relative flex w-full flex-col items-center justify-center lg:col-span-5 lg:items-end lg:self-stretch">
+              <div className="relative flex w-full min-w-0 flex-col items-center justify-center lg:col-span-5 min-[771px]:items-end min-[771px]:self-stretch">
                 {/* Card branco com bordas de 30px e sombra externa vermelha baseada em #FC4242 */}
                 <div
                   className="relative w-full max-w-[500px] rounded-[30px] overflow-hidden border-0 pt-[25px]"
@@ -763,9 +763,9 @@ function DominusFoodPage() {
               </div>
             </div>
           </div>
-          <div className="landing-page-container relative z-10 -mt-5">
-            <div className="grid w-full min-w-0 grid-cols-1 items-center gap-8 lg:grid-cols-12 lg:gap-8">
-              <div className="flex min-w-0 items-center justify-center lg:col-span-7 lg:pr-8">
+          <div className="landing-page-container relative z-10 pt-5">
+            <div className="grid w-full min-w-0 grid-cols-1 items-center gap-8 min-[771px]:grid-cols-12 min-[771px]:gap-6 lg:gap-8">
+              <div className="flex min-w-0 items-center justify-center min-[771px]:col-span-7 min-[771px]:pr-6 lg:pr-8">
                 <img
                   src={dominusFoodEcosystemImage}
                   alt="Ecossistema Dominus Food em computadores, telas de operação e dispositivos móveis"
@@ -773,7 +773,7 @@ function DominusFoodPage() {
                   decoding="async"
                 />
               </div>
-              <div className="flex h-full min-w-0 flex-col items-start justify-center gap-5 text-left lg:col-span-5 lg:ml-auto lg:mr-0 lg:w-full lg:max-w-[500px]">
+              <div className="flex h-full min-w-0 flex-col items-start justify-center gap-5 text-left min-[771px]:col-span-5 min-[771px]:ml-auto min-[771px]:mr-0 min-[771px]:w-full min-[771px]:max-w-[500px]">
                 <div className="inline-flex max-w-full items-center gap-2 rounded-full border border-[#FC4242]/40 bg-[#FC4242]/10 px-4 py-1.5">
                   <Wine size={14} className="shrink-0 text-[#FC4242]" aria-hidden="true" />
                   <span className="fluid-caption font-bold uppercase tracking-wider text-[#FC4242]">
