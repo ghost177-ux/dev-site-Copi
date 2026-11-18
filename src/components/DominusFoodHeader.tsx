@@ -11,8 +11,8 @@ export function DominusFoodHeader({
   onOpenBooking,
 }: DominusFoodHeaderProps) {
   return (
-    <header className="relative z-30 w-full bg-transparent">
-      <div className="landing-page-container flex min-h-[68px] sm:min-h-[76px] lg:min-h-[84px] items-center justify-between gap-2 sm:gap-4 py-2.5 sm:py-3">
+    <header className="relative z-30 w-full bg-transparent pt-3">
+      <div className="landing-page-container flex flex-col items-start gap-5 min-[476px]:flex-row min-[476px]:items-center min-[476px]:justify-between min-[476px]:gap-2 sm:gap-4 min-h-[68px] sm:min-h-[76px] lg:min-h-[84px] py-2.5 sm:py-3">
         {/* Lado esquerdo: Logotipo oficial Dominus Food mantendo proporção original */}
         <a
           href="/"
@@ -27,7 +27,7 @@ export function DominusFoodHeader({
         </a>
 
         {/* Lado direito: Dois botões lado a lado */}
-        <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
+        <div className="flex items-center gap-[12px] min-[476px]:gap-1.5 sm:gap-3 shrink-0">
           {/* Botão 1: Falar com um especialista (Link direto para o WhatsApp) */}
           <a
             id="header-food-cta-especialista"
